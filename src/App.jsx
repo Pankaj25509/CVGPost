@@ -259,7 +259,7 @@ const App = () => {
   const [pricingTab, setPricingTab] = useState("regular");
 
   // Partnership Specific States
-  const [partnerModal, setPartnerModal] = useState(null); // 'creator' or 'brand'
+  const [partnerModal, setPartnerModal] = useState(null);
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   useEffect(() => {
@@ -294,57 +294,58 @@ const App = () => {
   return (
     <div className="min-h-screen bg-zinc-950 text-white font-sans selection:bg-yellow-400 selection:text-white overflow-x-hidden">
       {/* Navbar */}
-      <nav className="fixed w-full z-50 px-6 py-4 backdrop-blur-xl bg-zinc-950/70 border-b border-zinc-800">
+      <nav className="fixed w-full z-50 px-6 py-4 backdrop-blur-xl bg-zinc-950/80 border-b border-zinc-800">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div
-            className="cursor-pointer"
+            className="cursor-pointer flex items-center justify-center overflow-hidden h-10 md:h-14 w-32 md:w-40"
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           >
             <img
               src="/logo.png"
               alt="CVGPOST Logo"
-              className="h-8 md:h-10 w-auto object-contain"
+              className="h-[300%] w-auto max-w-none object-contain brightness-110"
             />
           </div>
 
-          <div className="hidden md:flex flex-1 justify-center gap-10 text-[10px] font-black uppercase tracking-widest text-gray-400">
+          <div className="hidden md:flex flex-1 justify-center gap-10 text-[10px] font-black uppercase tracking-widest text-zinc-400">
             <a
               href="#how-it-works"
               onClick={(e) => scrollToSection(e, "how-it-works")}
-              className="hover:text-white transition-colors"
+              className="hover:text-yellow-400 transition-colors"
             >
               Why Choose Us
             </a>
             <a
               href="#services"
               onClick={(e) => scrollToSection(e, "services")}
-              className="hover:text-white transition-colors"
+              className="hover:text-yellow-400 transition-colors"
             >
               Our Services
             </a>
             <a
               href="#pricing"
               onClick={(e) => scrollToSection(e, "pricing")}
-              className="hover:text-white transition-colors"
+              className="hover:text-yellow-400 transition-colors"
             >
               Pricing
             </a>
             <a
               href="#partnership"
               onClick={(e) => scrollToSection(e, "partnership")}
-              className="hover:text-white transition-colors"
+              className="hover:text-yellow-400 transition-colors"
             >
               Partnership
             </a>
             <a
               href="#testimonials"
               onClick={(e) => scrollToSection(e, "testimonials")}
-              className="hover:text-white transition-colors"
+              className="hover:text-yellow-400 transition-colors"
             >
               Reviews
             </a>
           </div>
 
+          {/* Right Action Button */}
           <div className="flex justify-end min-w-[140px]">
             <motion.a
               href="/booking.html"
@@ -352,7 +353,7 @@ const App = () => {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-yellow-400 text-white px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-yellow-400 hover:text-white transition-all shadow-lg shadow-black/5"
+              className="bg-yellow-400 text-black px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-white transition-all shadow-lg shadow-yellow-400/20"
             >
               Book Now
             </motion.a>
@@ -872,7 +873,6 @@ const App = () => {
       {/* Footer */}
       <footer className="py-20 bg-zinc-950 border-t border-zinc-900">
         <div className="max-w-7xl mx-auto px-6 flex flex-col items-center">
-          
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -884,19 +884,6 @@ const App = () => {
           <p className="text-zinc-500 text-[10px] mb-10 uppercase tracking-[0.3em] font-black">
             Hyderabad
           </p>
-
-          <div className="flex gap-8 mb-12">
-            {["Instagram", "LinkedIn", "Email"].map((item) => (
-              <motion.a
-                key={item}
-                href="#"
-                whileHover={{ y: -3, color: "#EAB308" }}
-                className="text-zinc-400 text-[10px] font-black uppercase tracking-widest transition-colors cursor-pointer"
-              >
-                {item}
-              </motion.a>
-            ))}
-          </div>
 
           <div className="w-full max-w-md h-[1px] bg-zinc-900 mb-8" />
 

@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  Zap, Check, ArrowRight, User, Mail, Calendar, Clock, 
-  MessageSquare, ArrowLeft, ShieldCheck, Sparkles, Trophy, 
-  Camera, Briefcase, Heart 
+  Check, ArrowRight, User, Mail, Calendar, Clock, 
+  MessageSquare, ArrowLeft, ShieldCheck, Sparkles, Trophy 
 } from 'lucide-react';
 
 const BookingPage = () => {
@@ -42,21 +41,32 @@ const BookingPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white text-black font-sans selection:bg-yellow-400">
+    <div className="min-h-screen bg-zinc-950 text-white font-sans selection:bg-yellow-400 selection:text-black">
       {/* Navbar */}
-      <nav className="p-6 border-b border-gray-100 flex justify-between items-center bg-white/70 backdrop-blur-xl sticky top-0 z-50">
+      <nav className="p-6 border-b border-zinc-900 flex justify-between items-center bg-zinc-950/80 backdrop-blur-xl sticky top-0 z-50">
         <div className="flex items-center gap-6">
-          <a href="/" className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest hover:text-yellow-500 transition-colors group">
+          <a href="/" className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-zinc-500 hover:text-yellow-400 transition-colors group">
             <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
             Go Back
           </a>
-          <div className="h-4 w-[1px] bg-gray-200 hidden md:block" />
-          <div className="text-2xl font-black tracking-tighter flex items-center gap-2 cursor-pointer" onClick={() => window.location.href='/'}>
-            <div className="bg-yellow-400 p-1 rounded-lg"><Zap size={20} fill="black" /></div>
-            CVGPOST
+          
+          <div className="h-4 w-[1px] bg-zinc-800 hidden md:block" />
+          
+          {/* Logo Section - No Text, Just Image */}
+          <div 
+            className="cursor-pointer flex items-center justify-center overflow-hidden h-10 w-32"
+            onClick={() => window.location.href='/'}
+          >
+             <img
+                src="/logo.png" 
+                alt="CVGPOST Logo"
+                className="h-[280%] w-auto max-w-none object-contain brightness-110" 
+              />
           </div>
         </div>
-        <div className="text-[10px] font-black uppercase tracking-widest text-gray-400 hidden sm:block">Production Booking • 2026</div>
+        <div className="text-[10px] font-black uppercase tracking-widest text-zinc-600 hidden sm:block">
+            Production Booking • 2026
+        </div>
       </nav>
 
       <main className="max-w-7xl mx-auto py-16 px-6">
@@ -66,11 +76,11 @@ const BookingPage = () => {
           <div className="lg:col-span-5 space-y-10">
             <div>
               <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none mb-6">
-                Secure Your <span className="text-yellow-500">Slot</span>
+                Secure Your <span className="text-yellow-400">Slot</span>
               </h1>
               
               {/* Category Toggles */}
-              <div className="flex gap-2 p-1 bg-gray-100 rounded-2xl w-fit mb-8">
+              <div className="flex gap-2 p-1 bg-zinc-900/50 border border-zinc-800 rounded-2xl w-fit mb-8">
                 {Object.keys(pricingData).map((cat) => (
                   <button
                     key={cat}
@@ -79,7 +89,7 @@ const BookingPage = () => {
                       setSelectedPlan(pricingData[cat][0].title);
                     }}
                     className={`px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${
-                      activeCategory === cat ? 'bg-white text-black shadow-sm' : 'text-gray-400 hover:text-black'
+                      activeCategory === cat ? 'bg-yellow-400 text-black shadow-lg shadow-yellow-400/20' : 'text-zinc-500 hover:text-white'
                     }`}
                   >
                     {cat}
@@ -89,7 +99,7 @@ const BookingPage = () => {
             </div>
 
             <div className="space-y-4">
-              <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400">Select {activeCategory} Plan</h3>
+              <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500">Select {activeCategory} Plan</h3>
               <AnimatePresence mode="wait">
                 <motion.div 
                   key={activeCategory}
@@ -104,19 +114,21 @@ const BookingPage = () => {
                       whileHover={{ scale: 1.02, x: 5 }}
                       onClick={() => setSelectedPlan(plan.title)}
                       className={`p-6 rounded-[2.5rem] border-2 cursor-pointer transition-all relative overflow-hidden ${
-                        selectedPlan === plan.title ? 'border-yellow-400 bg-yellow-50 shadow-xl shadow-yellow-100/50' : 'border-gray-100 hover:border-gray-200'
+                        selectedPlan === plan.title 
+                        ? 'border-yellow-400 bg-yellow-400/5 shadow-xl shadow-yellow-400/5' 
+                        : 'border-zinc-900 bg-zinc-900/30 hover:border-zinc-700'
                       }`}
                     >
                       <div className="flex justify-between items-center relative z-10">
                         <div>
-                          <h4 className="font-black uppercase text-xl">{plan.title}</h4>
-                          <p className="text-yellow-600 font-black tracking-tight text-lg">₹{plan.price}</p>
+                          <h4 className="font-black uppercase text-xl text-white">{plan.title}</h4>
+                          <p className="text-yellow-400 font-black tracking-tight text-lg">₹{plan.price}</p>
                         </div>
                         {selectedPlan === plan.title && (
-                          <div className="bg-yellow-400 p-2 rounded-full"><Check size={18} strokeWidth={3} /></div>
+                          <div className="bg-yellow-400 p-2 rounded-full text-black"><Check size={18} strokeWidth={3} /></div>
                         )}
                       </div>
-                      <p className={`mt-3 text-xs font-medium transition-colors ${selectedPlan === plan.title ? 'text-gray-700' : 'text-gray-400'}`}>
+                      <p className={`mt-3 text-xs font-medium transition-colors ${selectedPlan === plan.title ? 'text-zinc-300' : 'text-zinc-500'}`}>
                         {plan.details}
                       </p>
                     </motion.div>
@@ -125,11 +137,11 @@ const BookingPage = () => {
               </AnimatePresence>
             </div>
 
-            <div className="pt-6 border-t border-gray-100">
+            <div className="pt-6 border-t border-zinc-900">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {benefits.map((b, i) => (
-                  <div key={i} className="flex items-center gap-3 text-[10px] font-black uppercase tracking-widest text-gray-700">
-                    <span className="text-yellow-500">{b.icon}</span> {b.text}
+                  <div key={i} className="flex items-center gap-3 text-[10px] font-black uppercase tracking-widest text-zinc-400">
+                    <span className="text-yellow-400">{b.icon}</span> {b.text}
                   </div>
                 ))}
               </div>
@@ -138,39 +150,39 @@ const BookingPage = () => {
 
           {/* Right Column: Form */}
           <div className="lg:col-span-7">
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-white p-8 md:p-12 rounded-[3.5rem] border-2 border-gray-100 shadow-2xl shadow-gray-100/50 relative overflow-hidden">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-zinc-900/50 p-8 md:p-12 rounded-[3.5rem] border border-zinc-800 shadow-2xl relative overflow-hidden">
               {!submitted ? (
                 <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} className="space-y-6 relative z-10">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black uppercase tracking-widest ml-4 text-gray-400">Your Name</label>
+                      <label className="text-[10px] font-black uppercase tracking-widest ml-4 text-zinc-500">Your Name</label>
                       <div className="relative">
-                        <User className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
-                        <input required placeholder="Enter Full Name" className="w-full bg-gray-50 rounded-2xl py-5 pl-14 pr-6 outline-none border-2 border-transparent focus:border-yellow-400 focus:bg-white transition-all font-bold" />
+                        <User className="absolute left-5 top-1/2 -translate-y-1/2 text-zinc-600" size={18} />
+                        <input required placeholder="Enter Full Name" className="w-full bg-zinc-950 rounded-2xl py-5 pl-14 pr-6 outline-none border-2 border-transparent focus:border-yellow-400 text-white placeholder-zinc-700 transition-all font-bold" />
                       </div>
                     </div>
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black uppercase tracking-widest ml-4 text-gray-400">Email Contact</label>
+                      <label className="text-[10px] font-black uppercase tracking-widest ml-4 text-zinc-500">Email Contact</label>
                       <div className="relative">
-                        <Mail className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
-                        <input required type="email" placeholder="email@company.com" className="w-full bg-gray-50 rounded-2xl py-5 pl-14 pr-6 outline-none border-2 border-transparent focus:border-yellow-400 focus:bg-white transition-all font-bold" />
+                        <Mail className="absolute left-5 top-1/2 -translate-y-1/2 text-zinc-600" size={18} />
+                        <input required type="email" placeholder="email@company.com" className="w-full bg-zinc-950 rounded-2xl py-5 pl-14 pr-6 outline-none border-2 border-transparent focus:border-yellow-400 text-white placeholder-zinc-700 transition-all font-bold" />
                       </div>
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black uppercase tracking-widest ml-4 text-gray-400">Preferred Date</label>
+                      <label className="text-[10px] font-black uppercase tracking-widest ml-4 text-zinc-500">Preferred Date</label>
                       <div className="relative">
-                        <Calendar className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
-                        <input required type="date" className="w-full bg-gray-50 rounded-2xl py-5 pl-14 pr-6 outline-none border-2 border-transparent focus:border-yellow-400 focus:bg-white transition-all font-bold" />
+                        <Calendar className="absolute left-5 top-1/2 -translate-y-1/2 text-zinc-600" size={18} />
+                        <input required type="date" className="w-full bg-zinc-950 rounded-2xl py-5 pl-14 pr-6 outline-none border-2 border-transparent focus:border-yellow-400 text-white placeholder-zinc-700 transition-all font-bold [color-scheme:dark]" />
                       </div>
                     </div>
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black uppercase tracking-widest ml-4 text-gray-400">Time Slot</label>
+                      <label className="text-[10px] font-black uppercase tracking-widest ml-4 text-zinc-500">Time Slot</label>
                       <div className="relative">
-                        <Clock className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
-                        <select className="w-full bg-gray-50 rounded-2xl py-5 pl-14 pr-6 outline-none border-2 border-transparent focus:border-yellow-400 focus:bg-white transition-all font-bold appearance-none">
+                        <Clock className="absolute left-5 top-1/2 -translate-y-1/2 text-zinc-600" size={18} />
+                        <select className="w-full bg-zinc-950 rounded-2xl py-5 pl-14 pr-6 outline-none border-2 border-transparent focus:border-yellow-400 text-white transition-all font-bold appearance-none">
                           <option>Morning (10AM - 2PM)</option>
                           <option>Evening (3PM - 7PM)</option>
                           <option>Full Day Session</option>
@@ -180,28 +192,29 @@ const BookingPage = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase tracking-widest ml-4 text-gray-400">Vision for this {activeCategory} Shoot</label>
+                    <label className="text-[10px] font-black uppercase tracking-widest ml-4 text-zinc-500">Vision for this {activeCategory} Shoot</label>
                     <div className="relative">
-                      <MessageSquare className="absolute left-5 top-6 text-gray-400" size={18} />
-                      <textarea placeholder={`What are we filming for your ${selectedPlan} session?`} className="w-full bg-gray-50 rounded-2xl py-5 pl-14 pr-6 outline-none border-2 border-transparent focus:border-yellow-400 focus:bg-white transition-all font-bold h-32 resize-none"></textarea>
+                      <MessageSquare className="absolute left-5 top-6 text-zinc-600" size={18} />
+                      <textarea placeholder={`What are we filming for your ${selectedPlan} session?`} className="w-full bg-zinc-950 rounded-2xl py-5 pl-14 pr-6 outline-none border-2 border-transparent focus:border-yellow-400 text-white placeholder-zinc-700 transition-all font-bold h-32 resize-none"></textarea>
                     </div>
                   </div>
 
-                  <button className="w-full bg-black text-white py-6 rounded-2xl font-black uppercase tracking-[0.2em] text-sm hover:bg-yellow-400 hover:text-black hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xl shadow-black/10 flex items-center justify-center gap-3 group">
+                  <button className="w-full bg-yellow-400 text-black py-6 rounded-2xl font-black uppercase tracking-[0.2em] text-sm hover:bg-white hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xl shadow-white/5 flex items-center justify-center gap-3 group">
                     Confirm {selectedPlan} Booking
                     <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                   </button>
                 </form>
               ) : (
                 <div className="text-center py-20 relative z-10">
-                  <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="bg-yellow-400 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-8 shadow-2xl shadow-yellow-200">
-                    <Check size={48} strokeWidth={3} />
+                  <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="bg-yellow-400 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-8 shadow-2xl shadow-yellow-400/50">
+                    <Check size={48} strokeWidth={3} className="text-black" />
                   </motion.div>
-                  <h2 className="text-4xl font-black uppercase tracking-tight mb-4">Request Sent!</h2>
-                  <p className="text-gray-500 font-bold uppercase tracking-widest text-[10px]">We'll be in touch within 2 hours.</p>
+                  <h2 className="text-4xl font-black uppercase tracking-tight mb-4 text-white">Request Sent!</h2>
+                  <p className="text-zinc-500 font-bold uppercase tracking-widest text-[10px]">We'll be in touch within 2 hours.</p>
                 </div>
               )}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-yellow-400/5 rounded-full -mr-16 -mt-16" />
+              {/* Decorative Glow */}
+              <div className="absolute top-0 right-0 w-64 h-64 bg-yellow-400/5 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none" />
             </motion.div>
           </div>
         </div>
