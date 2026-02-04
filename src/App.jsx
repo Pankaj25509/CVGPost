@@ -447,7 +447,8 @@ const App = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-yellow-400 text-black px-10 py-5 rounded-2xl text-[11px] font-black uppercase tracking-widest hover:bg-yellow-400 transition-all flex items-center justify-center gap-2 shadow-xl shadow-yellow-400/10"
+              onClick={() => window.open("/booking.html", "_blank")}
+              className="bg-yellow-400 text-black px-10 py-5 rounded-2xl text-[11px] font-black uppercase tracking-widest hover:bg-yellow-400 transition-all flex items-center justify-center gap-2 shadow-xl shadow-yellow-400/10 cursor-pointer"
             >
               Book Your Session <ArrowRight size={16} />
             </motion.button>
