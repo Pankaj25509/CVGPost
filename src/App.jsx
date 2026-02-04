@@ -487,15 +487,17 @@ const App = () => {
                   borderColor: "#EAB308",
                   backgroundColor: "#18181b",
                 }}
-                className="p-10 rounded-[2.5rem] border-2 border-zinc-800 bg-zinc-900 transition-all group cursor-default"
+                className="p-6 md:p-10 rounded-[2rem] md:rounded-[2.5rem] border-2 border-zinc-800 bg-zinc-900 transition-all group cursor-default"
               >
-                <div className="mb-6 p-4 bg-zinc-950 rounded-2xl w-fit shadow-sm group-hover:shadow-yellow-100 transition-all">
-                  {React.cloneElement(feature.icon, { size: 32 })}
+                <div className="mb-4 md:mb-6 p-3 md:p-4 bg-zinc-950 rounded-xl md:rounded-2xl w-fit shadow-sm group-hover:shadow-yellow-100 transition-all">
+                  {React.cloneElement(feature.icon, {
+                    className: "w-6 h-6 md:w-8 md:h-8 text-yellow-400",
+                  })}
                 </div>
-                <h3 className="text-xl font-black uppercase mb-4 tracking-tight">
+                <h3 className="text-lg md:text-xl font-black uppercase mb-2 md:mb-4 tracking-tight">
                   {feature.title}
                 </h3>
-                <p className="text-zinc-400 font-medium leading-relaxed text-sm text-white text-white">
+                <p className="text-zinc-400 font-medium leading-relaxed text-xs md:text-sm">
                   {feature.desc}
                 </p>
               </motion.div>
@@ -518,7 +520,7 @@ const App = () => {
               High Conversion Content
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-8">
             {projects.map((project, i) => (
               <motion.div
                 key={i}
@@ -527,24 +529,27 @@ const App = () => {
                   boxShadow: "0 0 30px rgba(250, 204, 21, 0.35)",
                   borderColor: "rgba(250, 204, 21, 1)",
                 }}
-                className="group relative aspect-[9/16] bg-zinc-900 rounded-[2.5rem] overflow-hidden border-2 border-zinc-900 transition-all duration-300 cursor-pointer"
+                className="group relative aspect-[9/16] bg-zinc-900 rounded-[1rem] md:rounded-[2.5rem] overflow-hidden border border-zinc-900 md:border-2 transition-all duration-300 cursor-pointer"
               >
                 <img
                   src={project.img}
                   className="absolute inset-0 w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
                   alt={project.name}
                 />
+
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="bg-yellow-400 p-5 rounded-full text-black transform scale-0 group-hover:scale-100 transition-transform duration-300 shadow-xl">
-                    <Play fill="black" size={24} />
+                  <div className="bg-yellow-400 p-2 md:p-5 rounded-full text-black transform scale-0 group-hover:scale-100 transition-transform duration-300 shadow-xl">
+                    <Play fill="black" className="w-4 h-4 md:w-6 md:h-6" />
                   </div>
                 </div>
-                <div className="absolute bottom-8 left-8 text-white z-10 text-left">
-                  <p className="text-yellow-400 text-[10px] font-black uppercase tracking-widest mb-1">
+
+                <div className="absolute bottom-3 left-3 md:bottom-8 md:left-8 text-white z-10 text-left">
+                  <p className="text-yellow-400 text-[6px] md:text-[10px] font-black uppercase tracking-widest mb-0.5 md:mb-1">
                     {project.category}
                   </p>
-                  <h3 className="text-2xl font-black leading-tight uppercase">
+                  <h3 className="text-xs md:text-2xl font-black leading-tight uppercase">
                     {project.name}
                   </h3>
                 </div>
@@ -557,30 +562,37 @@ const App = () => {
       {/* Pricing Section */}
       <section
         id="pricing"
-        className="py-24 px-6 max-w-7xl mx-auto bg-zinc-950 border-t border-zinc-800"
+        className="py-24 px-4 md:px-6 max-w-7xl mx-auto bg-zinc-950 border-t border-zinc-800"
       >
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-6xl font-black mb-12 uppercase text-white tracking-tighter">
             Plans & Pricing
           </h2>
-          <div className="flex flex-wrap justify-center gap-4 mb-16">
+
+          <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-16">
             {["regular", "wedding", "corporate"].map((tab) => (
               <button
                 key={tab}
                 onClick={() => setPricingTab(tab)}
-                className={`px-10 py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all ${pricingTab === tab ? "bg-yellow-400 text-black shadow-xl scale-105" : "bg-zinc-900 text-gray-400 hover:bg-zinc-40-200"}`}
+                className={`px-6 md:px-10 py-3 md:py-4 rounded-xl md:rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all ${
+                  pricingTab === tab
+                    ? "bg-yellow-400 text-black shadow-xl scale-105"
+                    : "bg-zinc-900 text-zinc-500 hover:bg-zinc-800"
+                }`}
               >
                 {tab}
               </button>
             ))}
           </div>
         </div>
+
+        {/* Swipe Container */}
         <motion.div
           key={pricingTab}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.4 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch"
+          className="flex md:grid md:grid-cols-3 gap-4 md:gap-8 overflow-x-auto md:overflow-visible pb-8 snap-x snap-mandatory scrollbar-hide"
         >
           {pricingData[pricingTab].map((plan, i) => (
             <motion.div
@@ -588,57 +600,78 @@ const App = () => {
               whileHover={{
                 y: -10,
                 borderColor: "rgba(250, 204, 21, 1)",
-                boxShadow: "0 0 40px rgba(250, 204, 21, 0.3)",
+                boxShadow: "0 0 40px rgba(250, 204, 21, 0.2)",
               }}
-              className={`p-12 min-h-[600px] rounded-[3rem] border-2 border-zinc-900 transition-all flex flex-col relative ${plan.dark ? "bg-yellow-400 text-black scale-105 shadow-2xl shadow-yellow-200/50" : "bg-zinc-900 text-white border-zinc-800"}`}
+              // MOBILE: min-w-[85vw] ensures they stay in one row but are large enough to read
+              className={`p-8 md:p-12 min-w-[85vw] md:min-w-0 md:min-h-[600px] rounded-[2.5rem] md:rounded-[3rem] border-2 transition-all flex flex-col relative snap-center ${
+                plan.dark
+                  ? "bg-yellow-400 text-black border-yellow-400 shadow-2xl shadow-yellow-400/20"
+                  : "bg-zinc-900 text-white border-zinc-800"
+              }`}
             >
               {plan.popular && (
-                <div className="absolute top-6 right-8 bg-yellow-400 text-white text-[10px] font-black px-4 py-1 rounded-full uppercase tracking-widest">
+                <div
+                  className={`absolute top-6 right-8 text-[8px] font-black px-4 py-1 rounded-full uppercase tracking-widest ${plan.dark ? "bg-black text-white" : "bg-yellow-400 text-black"}`}
+                >
                   Most Popular
                 </div>
               )}
+
               <h3
-                className={`text-xl font-bold mb-2 uppercase tracking-widest ${!plan.dark ? "text-gray-400" : ""}`}
+                className={`text-lg md:text-xl font-bold mb-2 uppercase tracking-widest ${!plan.dark ? "text-zinc-500" : "text-black/60"}`}
               >
                 {plan.title}
               </h3>
+
               <div
-                className={`text-5xl font-black mb-8 ${!plan.dark ? "text-yellow-400" : ""}`}
+                className={`text-4xl md:text-5xl font-black mb-8 ${!plan.dark ? "text-yellow-400" : "text-black"}`}
               >
                 {plan.price}
-                <span className="text-sm text-white text-white text-gray-400 font-bold">
+                <span
+                  className={`text-xs md:text-sm font-bold ml-1 ${!plan.dark ? "text-zinc-500" : "text-black/40"}`}
+                >
                   {plan.suffix}
                 </span>
               </div>
+
               <div className="flex-grow">
-                <ul className="space-y-6">
+                <ul className="space-y-4 md:space-y-6">
                   {plan.features.map((feat, idx) => (
                     <li
                       key={idx}
-                      className={`flex items-center gap-3 text-sm text-white text-white font-black ${!plan.dark ? "text-zinc-300" : ""}`}
+                      className={`flex items-start gap-3 text-xs md:text-sm font-black leading-tight ${!plan.dark ? "text-zinc-300" : "text-black"}`}
                     >
                       <Check
                         size={18}
-                        className={
-                          !plan.dark ? "text-yellow-400" : "text-black"
-                        }
-                      />{" "}
+                        className={`mt-0.5 flex-shrink-0 ${!plan.dark ? "text-yellow-400" : "text-black"}`}
+                      />
                       {feat}
                     </li>
                   ))}
                 </ul>
               </div>
+
               <button
                 onClick={() => window.open("/booking.html", "_blank")}
-                className={`w-full py-5 mt-8 rounded-2xl font-black uppercase text-xs tracking-widest transition-all cursor-pointer ${plan.dark ? "bg-black text-white" : "bg-yellow-400 text-white hover:bg-yellow-400 hover:text-white shadow-xl"}`}
+                className={`w-full py-5 mt-8 rounded-2xl font-black uppercase text-[10px] tracking-widest transition-all ${
+                  plan.dark
+                    ? "bg-black text-white hover:bg-zinc-800"
+                    : "bg-yellow-400 text-black hover:bg-white"
+                }`}
               >
                 Book {plan.title}
               </button>
             </motion.div>
           ))}
         </motion.div>
-      </section>
 
+        {/* Mobile Swipe Indicator (Optional) */}
+        <div className="flex justify-center gap-1.5 mt-4 md:hidden">
+          {[0, 1, 2].map((dot) => (
+            <div key={dot} className="w-1.5 h-1.5 rounded-full bg-zinc-800" />
+          ))}
+        </div>
+      </section>
       {/* Partnership Section (Reelmakers and Brands) */}
       <section
         id="partnership"
