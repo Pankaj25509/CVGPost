@@ -1,16 +1,24 @@
-# React + Vite
+CVGPOST | Premium Video Production Portfolio 2026
+CVGPOST is a high-performance, dark-themed portfolio and booking platform built for a modern video production house. It features a cinematic user interface, responsive service showcases, and a seamless booking workflow tailored for high-conversion content.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Key Features
+Cinematic UI: A sleek zinc-950 dark-mode aesthetic with high-contrast gold (yellow-400) accents.
 
-Currently, two official plugins are available:
+Mobile-First Design: * Services: 2-column "Instagram-style" grid for quick browsing.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Pricing: Horizontal "snap-to-center" swipe carousel for effortless plan comparison on small screens.
 
-## React Compiler
+Dynamic Booking System: Integrated React-based booking form with category-specific pricing and validation.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Optimized Performance: Built with React and Tailwind CSS for lightning-fast load times and smooth Framer Motion animations.
 
-## Expanding the ESLint configuration
+Custom Branding: SVG-integrated logo support and pixel-perfect favicon optimization.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Tech Stack
+Frontend: React.js
+
+Styling: Tailwind CSS
+
+Animations: Framer Motion
+
+Icons: Lucide-React
