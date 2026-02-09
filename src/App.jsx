@@ -28,52 +28,196 @@ import {
   ShieldCheck,
   Trophy,
 } from "lucide-react";
-
-// --- DATA ---
-
-const projects = [
+const serviceData = [
   {
-    name: "Urban Streetwear",
-    category: "Fashion Reel",
+    id: 1,
+    name: "Birthday Recap",
+    cat: "Personal Events",
+    img: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=1000&auto=format&fit=crop",
+  },
+  {
+    id: 2,
+    name: "Proposal Shoot",
+    cat: "Personal Events",
+    img: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=1000&auto=format&fit=crop",
+  },
+  {
+    id: 3,
+    name: "Family Gala",
+    cat: "Personal Events",
+    img: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1000&auto=format&fit=crop",
+  },
+
+  {
+    id: 4,
+    name: "Viral Hook",
+    cat: "Influencers",
     img: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1000&auto=format&fit=crop",
   },
   {
-    name: "Luxury Interior",
-    category: "Real Estate",
-    img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000&auto=format&fit=crop",
-  },
-  {
-    name: "Automotive Motion",
-    category: "Car Cinematic",
+    id: 5,
+    name: "Creator Edit",
+    cat: "Influencers",
     img: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1000&auto=format&fit=crop",
   },
   {
-    name: "Gourmet Plating",
-    category: "Food & Beverage",
+    id: 6,
+    name: "Trend Setter",
+    cat: "Influencers",
+    img: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1000&auto=format&fit=crop",
+  },
+
+  {
+    id: 7,
+    name: "Product Promo",
+    cat: "Brands",
     img: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1000&auto=format&fit=crop",
   },
   {
-    name: "Fitness Grind",
-    category: "Sports Promo",
-    img: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1000&auto=format&fit=crop",
+    id: 8,
+    name: "Brand Story",
+    cat: "Brands",
+    img: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=1000&auto=format&fit=crop",
   },
   {
-    name: "Nightlife Vibe",
-    category: "Event Coverage",
+    id: 9,
+    name: "Commercial Cut",
+    cat: "Brands",
     img: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1000&auto=format&fit=crop",
+  },
+
+  {
+    id: 10,
+    name: "Cinematic Vows",
+    cat: "Weddings",
+    img: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=1000&auto=format&fit=crop",
+  },
+  {
+    id: 11,
+    name: "The Big Day",
+    cat: "Weddings",
+    img: "https://plus.unsplash.com/premium_photo-1675851210855-e7727076e829?q=80&w=687&auto=format&fit=crop",
+  },
+  {
+    id: 12,
+    name: "Wedding Teaser",
+    cat: "Weddings",
+    img: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1000&auto=format&fit=crop",
+  },
+
+  {
+    id: 13,
+    name: "Supercar Reveal",
+    cat: "Cars & Bikes",
+    img: "https://images.unsplash.com/photo-1628519592419-bf288f08cef5?q=80&w=687&auto=format&fit=crop",
+  },
+  {
+    id: 14,
+    name: "Track Day",
+    cat: "Cars & Bikes",
+    img: "https://images.unsplash.com/photo-1591637333184-19aa84b3e01f?q=80&w=687&auto=format&fit=crop",
+  },
+  {
+    id: 15,
+    name: "Neon Ride",
+    cat: "Cars & Bikes",
+    img: "https://plus.unsplash.com/premium_photo-1686730540277-c7e3a5571553?q=80&w=764&auto=format&fit=crop",
+  },
+
+  {
+    id: 16,
+    name: "Urban Style",
+    cat: "Portraits",
+    img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1000&auto=format&fit=crop",
+  },
+  {
+    id: 17,
+    name: "Studio Mood",
+    cat: "Portraits",
+    img: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=1000&auto=format&fit=crop",
+  },
+  {
+    id: 18,
+    name: "Golden Hour",
+    cat: "Portraits",
+    img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1000&auto=format&fit=crop",
+  },
+
+  {
+    id: 19,
+    name: "Model Collab",
+    cat: "Collabs",
+    img: "https://plus.unsplash.com/premium_photo-1677529485307-34dc32286a21?q=80&w=687&auto=format&fit=crop",
+  },
+  {
+    id: 20,
+    name: "Artistic Vision",
+    cat: "Collabs",
+    img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1000&auto=format&fit=crop",
+  },
+  {
+    id: 21,
+    name: "Studio Collab",
+    cat: "Collabs",
+    img: "https://images.unsplash.com/photo-1631203924626-549ba231917e?q=80&w=688&auto=format&fit=crop",
+  },
+
+  {
+    id: 22,
+    name: "Luxury Villa",
+    cat: "Real Estate",
+    img: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=1000&auto=format&fit=crop",
+  },
+  {
+    id: 23,
+    name: "Modern Office",
+    cat: "Real Estate",
+    img: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1000&auto=format&fit=crop",
+  },
+  {
+    id: 24,
+    name: "Penthouse Tour",
+    cat: "Real Estate",
+    img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1000&auto=format&fit=crop",
   },
 ];
 
+const categories = [
+  "Personal Events",
+  "Influencers",
+  "Brands",
+  "Weddings",
+  "Cars & Bikes",
+  "Portraits",
+  "Collabs",
+  "Real Estate",
+];
+const AnimatedBadge = () => {
+  return (
+    <motion.div
+      animate={{ y: [0, -8, 0] }}
+      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+      className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md shadow-lg"
+    >
+      <Sparkles size={14} className="text-orange-500 animate-pulse" />
+      <span className="text-[11px] font-bold tracking-wider uppercase bg-gradient-to-r from-orange-500 to-yellow-300 bg-clip-text text-transparent">
+        Professional Reelmaking Services
+      </span>
+    </motion.div>
+  );
+};
+
+// --- DATA ---
 const features = [
   {
     icon: <Award className="text-yellow-400" />,
     title: "Quality Work",
-    desc: "Cinema-grade mobile visuals shot on iPhone 16 Pro hardware for maximum clarity.",
+    desc: "Cinema-grade mobile visuals shot on iPhone hardware for maximum clarity.",
   },
   {
     icon: <Clock className="text-yellow-400" />,
-    title: "On-Time Delivery",
-    desc: "Raw footage delivered instantly; high-end edited reels delivered within 24-48 hours.",
+    title: "Fast Turnaround",
+    desc: "Get your stunning reels delivered within 24-48 hours without compromising on quality.",
   },
   {
     icon: <Target className="text-yellow-400" />,
@@ -254,6 +398,8 @@ const faqs = [
 ];
 
 const App = () => {
+  const [activeTab, setActiveTab] = useState("Personal Events");
+  const displayReels = serviceData.filter((reel) => reel.cat === activeTab);
   const [activeIndex, setActiveIndex] = useState(null);
   const [showScroll, setShowScroll] = useState(false);
   const [pricingTab, setPricingTab] = useState("regular");
@@ -313,35 +459,42 @@ const App = () => {
               onClick={(e) => scrollToSection(e, "how-it-works")}
               className="hover:text-yellow-400 transition-colors"
             >
-              Why Choose Us
+              Why Us
             </a>
             <a
               href="#services"
               onClick={(e) => scrollToSection(e, "services")}
               className="hover:text-yellow-400 transition-colors"
             >
-              Our Services
+              Services
             </a>
             <a
               href="#pricing"
               onClick={(e) => scrollToSection(e, "pricing")}
               className="hover:text-yellow-400 transition-colors"
             >
-              Pricing
+              Packages
+            </a>
+            <a
+              href="#partnership"
+              onClick={(e) => scrollToSection(e, "")}
+              className="hover:text-yellow-400 transition-colors"
+            >
+              Our Works
             </a>
             <a
               href="#partnership"
               onClick={(e) => scrollToSection(e, "partnership")}
               className="hover:text-yellow-400 transition-colors"
             >
-              Partnership
+              Partner
             </a>
             <a
-              href="#testimonials"
-              onClick={(e) => scrollToSection(e, "testimonials")}
+              href="#partnership"
+              onClick={(e) => scrollToSection(e, "")}
               className="hover:text-yellow-400 transition-colors"
             >
-              Reviews
+              Contact
             </a>
           </div>
 
@@ -366,18 +519,19 @@ const App = () => {
         <motion.p
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-yellow-600 text-[10px] font-black tracking-[0.4em] uppercase mb-6 z-20 text-center"
+          className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-yellow-300 text-[10px] font-black tracking-[0.4em] uppercase mb-6 z-20 text-center"
         >
-          Uncompromising Video Standards
+          CRAFTED • CURATED • COMPLETE
         </motion.p>
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="text-white text-4xl md:text-7xl font-black mb-16 text-center z-20 max-w-5xl leading-tight tracking-tighter"
+          className="text-transparent bg-clip-text bg-gradient-to-br from-orange-600 via-orange-400 to-yellow-200 text-4xl md:text-7xl font-black mb-16 text-center z-20 max-w-5xl leading-tight tracking-tighter"
         >
-          CRAFTED • CURATED •<br />
-          <span className="text-yellow-400">COMPLETE</span>
+          Create Stunning Reels That
+          <br />
+          Capture Attention
         </motion.h1>
 
         <div className="relative w-full max-w-4xl flex flex-col items-center">
@@ -387,7 +541,7 @@ const App = () => {
             transition={{ duration: 1.2 }}
             className="absolute inset-0 flex justify-center items-center z-0 select-none pointer-events-none"
           >
-            <h2 className="text-[12vw] font-black text-white leading-none uppercase tracking-tighter">
+            <h2 className="text-[8vw] font-black text-white leading-none uppercase tracking-tighter">
               CVGPOST
             </h2>
           </motion.div>
@@ -400,7 +554,7 @@ const App = () => {
               type: "spring",
               bounce: 0.3,
             }}
-            className="relative z-10 w-[220px] md:w-[270px] aspect-[9/19] bg-black rounded-[3.2rem] border-[9px] border-zinc-900 shadow-2xl overflow-hidden mb-12"
+            className="relative z-10 w-[180px] md:w-[220px] aspect-[9/19] bg-black rounded-[2.8rem] md:rounded-[3.2rem] border-[7px] border-zinc-900 shadow-2xl overflow-hidden mb-12"
           >
             <div className="flex flex-col h-full bg-black relative">
               <img
@@ -428,16 +582,11 @@ const App = () => {
                   <h3 className="text-white text-2xl font-black leading-none uppercase mb-6">
                     Create <br /> Your <br /> Legacy.
                   </h3>
-                  <button
-                    onClick={() => window.open("/booking.html", "_blank")}
-                    className="w-full py-4 bg-yellow-400 rounded-2xl text-[10px] font-black uppercase tracking-widest text-white shadow-lg cursor-pointer active:scale-95 transition-transform"
-                  >
-                    Start Now
-                  </button>
                 </div>
               </div>
             </div>
           </motion.div>
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -447,7 +596,7 @@ const App = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => window.open("/booking.html", "_blank")}
+              onClick={() => window.open("/booking", "_self")}
               className="bg-yellow-400 text-black px-10 py-5 rounded-2xl text-[11px] font-black uppercase tracking-widest hover:bg-yellow-400 transition-all flex items-center justify-center gap-2 shadow-xl shadow-yellow-400/10 cursor-pointer"
             >
               Book Your Session <ArrowRight size={16} />
@@ -473,10 +622,11 @@ const App = () => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-6xl font-black uppercase mb-4 tracking-tighter">
-              How We Deliver
+              Where Your Story Meets Our Lens
             </h2>
             <p className="text-gray-400 font-bold uppercase tracking-widest text-[10px]">
-              The CVGPOST Advantage
+              A fusion of technical expertise and creative intuition, designed
+              to deliver reels that resonate long after the first view.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -507,55 +657,83 @@ const App = () => {
         </div>
       </section>
 
-      {/* Our Services Section */}
+      {/* Our Services */}
+
       <section
         id="services"
         className="py-24 px-6 bg-zinc-950 border-t border-zinc-800"
       >
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-black uppercase mb-4 tracking-tighter">
-              Our Services
+            <h2 className="text-4xl md:text-6xl font-black uppercase mb-4 tracking-tighter text-white">
+              Our Portfolio
             </h2>
             <p className="text-gray-400 font-bold uppercase tracking-widest text-[10px]">
-              High Conversion Content
+              Cinematic Excellence across every category.
             </p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-8">
-            {projects.map((project, i) => (
-              <motion.div
-                key={i}
-                whileHover={{
-                  y: -10,
-                  boxShadow: "0 0 30px rgba(250, 204, 21, 0.35)",
-                  borderColor: "rgba(250, 204, 21, 1)",
-                }}
-                className="group relative aspect-[9/16] bg-zinc-900 rounded-[1rem] md:rounded-[2.5rem] overflow-hidden border border-zinc-900 md:border-2 transition-all duration-300 cursor-pointer"
+
+          {/* Scrollable Categories for Mobile */}
+          <div className="flex overflow-x-auto md:justify-center gap-6 mb-16 pb-4 scrollbar-hide no-scrollbar">
+            {categories.map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`text-[11px] font-black uppercase tracking-[0.2em] pb-2 transition-all border-b-2 whitespace-nowrap ${
+                  activeTab === tab
+                    ? "border-yellow-400 text-yellow-400"
+                    : "border-transparent text-zinc-600 hover:text-zinc-400"
+                }`}
               >
-                <img
-                  src={project.img}
-                  className="absolute inset-0 w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
-                  alt={project.name}
-                />
-
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
-
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="bg-yellow-400 p-2 md:p-5 rounded-full text-black transform scale-0 group-hover:scale-100 transition-transform duration-300 shadow-xl">
-                    <Play fill="black" className="w-4 h-4 md:w-6 md:h-6" />
-                  </div>
-                </div>
-
-                <div className="absolute bottom-3 left-3 md:bottom-8 md:left-8 text-white z-10 text-left">
-                  <p className="text-yellow-400 text-[6px] md:text-[10px] font-black uppercase tracking-widest mb-0.5 md:mb-1">
-                    {project.category}
-                  </p>
-                  <h3 className="text-xs md:text-2xl font-black leading-tight uppercase">
-                    {project.name}
-                  </h3>
-                </div>
-              </motion.div>
+                {tab}
+              </button>
             ))}
+          </div>
+
+          {/* Responsive Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8">
+            <AnimatePresence mode="wait">
+              {displayReels.map((reel) => (
+                <motion.div
+                  key={reel.id}
+                  layout
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  whileHover={{
+                    y: -10,
+                    boxShadow: "0 0 40px rgba(250, 204, 21, 0.3)",
+                    borderColor: "#EAB308",
+                  }}
+                  className="group relative aspect-[9/16] bg-zinc-900 rounded-[2rem] md:rounded-[2.5rem] overflow-hidden border-2 border-zinc-900 transition-all duration-300 cursor-pointer"
+                >
+                  <img
+                    src={reel.img}
+                    className="absolute inset-0 w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
+                    alt={reel.name}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
+
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="relative">
+                      <div className="absolute inset-0 bg-yellow-400 rounded-full animate-ping opacity-0 group-hover:opacity-30" />
+                      <div className="relative w-16 h-16 md:w-20 md:h-20 bg-yellow-400 rounded-full flex items-center justify-center scale-0 group-hover:scale-100 transition-transform duration-500">
+                        <Play size={24} fill="black" className="ml-1" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="absolute bottom-6 left-6 md:bottom-10 md:left-10 text-left">
+                    <p className="text-yellow-400 text-[8px] md:text-[10px] font-black uppercase tracking-widest mb-1">
+                      {activeTab}
+                    </p>
+                    <h3 className="text-xl md:text-2xl font-black uppercase leading-tight text-white">
+                      {reel.name}
+                    </h3>
+                  </div>
+                </motion.div>
+              ))}
+            </AnimatePresence>
           </div>
         </div>
       </section>
