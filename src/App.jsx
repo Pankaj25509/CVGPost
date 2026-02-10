@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, easeOut } from "framer-motion";
 import {
   Zap,
   Check,
@@ -248,100 +248,122 @@ const pricingData = {
       price: "₹1,999",
       suffix: "/hr",
       features: [
-        "Shot on iPhone 16 Pro",
+        "Shot on iPhone",
         "1 Professional Reel",
         "Raw Footage Access",
+        "CVGPost Logo Mandatory",
       ],
       dark: false,
     },
     {
       title: "Half Day",
-      price: "₹4,999",
-      suffix: "",
+      price: "₹4,799",
       features: [
-        "4 Hours Coverage",
-        "4-5 Professional Reels",
-        "On-the-spot Delivery",
-      ],
-      popular: true,
-      dark: true,
-    },
-    {
-      title: "Full Day",
-      price: "₹8,999",
-      suffix: "",
-      features: [
-        "8 Hours Coverage",
-        "10+ Professional Reels",
-        "Multi-Location Shoot",
+        "3 Hours Coverage",
+        "2 Professional Reels",
+        "Raw Footage Access",
+        "Drone Footage",
+        "Extra Reel",
+        "Hand-Light",
+        "Customized Reel Edit",
+        "CVGPost Logo Mandatory",
       ],
       dark: false,
     },
   ],
   wedding: [
     {
-      title: "Teaser",
-      price: "₹12,000",
-      suffix: "",
+      title: "Starter",
+      price: "₹11,999",
+      suffix: "+GST",
       features: [
-        "Cinematic Highlight Reel",
-        "Drone Shots Included",
-        "24hr Fast Delivery",
+        "Shot on iPhone",
+        "Covers 1 Event",
+        "3 Reels",
+        "CVGPost Logo Mandatory",
       ],
       dark: false,
     },
     {
-      title: "Traditional",
-      price: "₹25,000",
-      suffix: "",
+      title: "Elevate",
+      price: "₹21,999",
+      suffix: "+GST",
       features: [
-        "Full Event Coverage",
-        "iPhone 16 Pro Quality",
-        "Social Media Optimized",
+        "Shot on iPhone",
+        "Covers 2 Events",
+        "5 Reels + 1 Reel Complimentary",
+        "CVGPost Logo Mandatory",
       ],
-      popular: true,
-      dark: true,
+      dark: false,
     },
     {
-      title: "Premium",
-      price: "₹45,000",
-      suffix: "",
+      title: "Classic",
+      price: "₹34,999",
+      suffix: "+GST",
       features: [
-        "Multi-Camera Setup",
-        "Long-form Documentary",
-        "Luxury Photo Album",
+        "Shot on iPhone",
+        "Covers 3 Events",
+        "8 Reels + 2 Reels Complimentary",
+        "CVGPost Logo Mandatory",
+      ],
+      dark: false,
+    },
+    {
+      title: "Signature",
+      price: "₹54,999",
+      suffix: "+GST",
+      features: [
+        "Shot on iPhone",
+        "Covers 4 Events",
+        "12 Reels + 3 Reels Complimentary",
+        "Complimentary HD Photos",
+        "CVGPost Logo Mandatory",
+        "Drone Shoot for 1 Event Complimentary",
+      ],
+      dark: false,
+    },
+    {
+      title: "Prestige",
+      price: "₹66,999",
+      suffix: "+GST",
+      features: [
+        "Shot on iPhone",
+        "Covers 5 Events",
+        "16 Reels + 4 Reels Complimentary",
+        "Complimentary HD Photos",
+        "CVGPost Logo Mandatory",
+        "Drone Shoot for 2 Event Complimentary",
+      ],
+      dark: false,
+    },
+    {
+      title: "Royal",
+      price: "₹79,999",
+      suffix: "+GST",
+      features: [
+        "Shot on iPhone",
+        "Covers 6 Events",
+        "20 Reels + 5 Reels Complimentary",
+        "Complimentary HD Photos",
+        "CVGPost Logo Mandatory",
+        "Drone Shoot for 3 Event Complimentary",
       ],
       dark: false,
     },
   ],
-  corporate: [
+  business: [
     {
-      title: "Startup",
-      price: "₹15,000",
-      suffix: "",
-      features: ["Founder Story Video", "HQ Audio Setup", "2 Revision Rounds"],
-      dark: false,
-    },
-    {
-      title: "Professional",
-      price: "₹35,000",
+      title: "Smart Price Option",
+      price: "₹10,000",
       suffix: "",
       features: [
-        "Office B-Roll",
-        "Customer Testimonials",
-        "LinkedIn Optimized",
-      ],
-      popular: true,
-      dark: true,
-    },
-    {
-      title: "Enterprise",
-      price: "₹75,000",
-      suffix: "",
-      features: [
-        "Complete Brand Story",
-        "Multiple Interviews",
-        "Ads Media Kit",
+        "Cinematic visuals",
+        "Complete brand story",
+        "Customer testimonials",
+        "Expert-led production",
+        "Seamless coordination",
+        "Polished visual output",
+        "Campaign & launch ready",
       ],
       dark: false,
     },
@@ -749,7 +771,7 @@ const App = () => {
           </h2>
 
           <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-16">
-            {["regular", "wedding", "corporate"].map((tab) => (
+            {["regular", "wedding", "business"].map((tab) => (
               <button
                 key={tab}
                 onClick={() => setPricingTab(tab)}
@@ -768,34 +790,26 @@ const App = () => {
         {/* Swipe Container */}
         <motion.div
           key={pricingTab}
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.4 }}
-          className="flex md:grid md:grid-cols-3 gap-4 md:gap-8 overflow-x-auto md:overflow-visible pb-8 snap-x snap-mandatory scrollbar-hide"
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.2 }}
+          className="flex md:flex-wrap md:justify-center gap-4 md:gap-8 overflow-x-auto md:overflow-visible pb-8 snap-x snap-mandatory scrollbar-hide"
         >
           {pricingData[pricingTab].map((plan, i) => (
             <motion.div
               key={i}
               whileHover={{
                 y: -10,
-                borderColor: "rgba(250, 204, 21, 1)",
-                boxShadow: "0 0 40px rgba(250, 204, 21, 0.2)",
+                borderColor: "rgba(250, 204, 21, 0.5)",
+                boxShadow: "0 0 40px rgba(250, 204, 21, 0.1)",
               }}
-              // MOBILE: min-w-[85vw] ensures they stay in one row but are large enough to read
-              className={`p-8 md:p-12 min-w-[85vw] md:min-w-0 md:min-h-[600px] rounded-[2.5rem] md:rounded-[3rem] border-2 transition-all flex flex-col relative snap-center ${
+              // Fixed width (md:w-[380px]) ensures all 6 wedding tiles look identical
+              className={`p-8 md:p-12 min-w-[85vw] md:min-w-[380px] md:max-w-[400px] min-h-[650px] rounded-[2.5rem] md:rounded-[3rem] border-2 transition-all flex flex-col relative snap-center ${
                 plan.dark
-                  ? "bg-yellow-400 text-black border-yellow-400 shadow-2xl shadow-yellow-400/20"
-                  : "bg-zinc-900 text-white border-zinc-800"
+                  ? "bg-yellow-400 text-black border-transparent shadow-2xl shadow-yellow-400/20"
+                  : "bg-zinc-900 text-white border-zinc-800 hover:border-zinc-700"
               }`}
             >
-              {plan.popular && (
-                <div
-                  className={`absolute top-6 right-8 text-[8px] font-black px-4 py-1 rounded-full uppercase tracking-widest ${plan.dark ? "bg-black text-white" : "bg-yellow-400 text-black"}`}
-                >
-                  Most Popular
-                </div>
-              )}
-
               <h3
                 className={`text-lg md:text-xl font-bold mb-2 uppercase tracking-widest ${!plan.dark ? "text-zinc-500" : "text-black/60"}`}
               >
@@ -814,7 +828,7 @@ const App = () => {
               </div>
 
               <div className="flex-grow">
-                <ul className="space-y-4 md:space-y-6">
+                <ul className="space-y-4">
                   {plan.features.map((feat, idx) => (
                     <li
                       key={idx}
@@ -843,14 +857,13 @@ const App = () => {
             </motion.div>
           ))}
         </motion.div>
-
-        {/* Mobile Swipe Indicator (Optional) */}
         <div className="flex justify-center gap-1.5 mt-4 md:hidden">
           {[0, 1, 2].map((dot) => (
             <div key={dot} className="w-1.5 h-1.5 rounded-full bg-zinc-800" />
           ))}
         </div>
       </section>
+
       {/* Partnership Section (Reelmakers and Brands) */}
       <section
         id="partnership"
