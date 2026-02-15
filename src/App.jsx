@@ -499,7 +499,7 @@ const App = () => {
             </a>
             <a
               href="#partnership"
-              onClick={(e) => scrollToSection(e, "")}
+              onClick={(e) => scrollToSection(e, "works")}
               className="hover:text-yellow-400 transition-colors"
             >
               Our Works
@@ -627,7 +627,7 @@ const App = () => {
             <motion.button
               whileHover={{ scale: 1.05, borderColor: "#EAB308" }}
               whileTap={{ scale: 0.95 }}
-              onClick={(e) => scrollToSection(e, "services")}
+              onClick={(e) => scrollToSection(e, "works")}
               className="bg-transparent text-white border-2 border-zinc-800 px-10 py-5 rounded-2xl text-[11px] font-black uppercase tracking-widest transition-all flex items-center justify-center cursor-pointer"
             >
               Our Services
@@ -651,7 +651,7 @@ const App = () => {
               to deliver reels that resonate long after the first view.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
             {features.map((feature, i) => (
               <motion.div
                 key={i}
@@ -681,8 +681,88 @@ const App = () => {
 
       {/* Our Services */}
 
+      {/* Pricing Section */}
+      <section id="pricing" className="py-24 px-4 md:px-6 max-w-7xl mx-auto bg-zinc-950 border-t border-zinc-800">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-6xl font-black mb-4 uppercase text-white tracking-tighter">
+            Choose Your Perfect Plan
+          </h2>
+          <p className="text-zinc-500 font-bold uppercase tracking-widest text-[10px]">Simple pricing for extraordinary results.</p>
+        </div>
+
+        {/* Regular Pricing Tiles (2 Tiles) */}
+        <div className="grid md:grid-cols-2 gap-8 mb-12 justify-center max-w-5xl mx-auto">
+          {pricingData.regular.map((plan, i) => (
+            <motion.div
+              key={i}
+              whileHover={{ y: -10, borderColor: "rgba(250, 204, 21, 0.5)" }}
+              className="p-8 md:p-12 rounded-[2.5rem] border-2 border-zinc-800 bg-zinc-900 text-white transition-all flex flex-col"
+            >
+              <h3 className="text-lg font-bold mb-2 uppercase tracking-widest text-zinc-500">{plan.title}</h3>
+              <div className="text-4xl md:text-5xl font-black mb-8 text-yellow-400">
+                {plan.price}<span className="text-sm ml-1 text-zinc-500">{plan.suffix}</span>
+              </div>
+              <ul className="space-y-4 flex-grow">
+                {plan.features.map((feat, idx) => (
+                  <li key={idx} className="flex items-start gap-3 text-xs md:text-sm font-black text-zinc-300">
+                    <Check size={18} className="text-yellow-400 flex-shrink-0" /> {feat}
+                  </li>
+                ))}
+              </ul>
+              <button onClick={() => window.location.href = "/booking"} className="w-full py-5 mt-8 rounded-2xl font-black uppercase text-[10px] bg-yellow-400 text-black hover:bg-white transition-all">
+                Book {plan.title}
+              </button>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Wide Category Tiles (Wedding & Business) */}
+        <div className="grid grid-cols-1 gap-8 max-w-5xl mx-auto">
+          {/* Wedding Wide Tile */}
+          <motion.div
+            whileHover={{ scale: 1.01 }}
+            className="relative overflow-hidden rounded-[2.5rem] border-2 border-zinc-800 bg-zinc-900 p-8 md:p-12 flex flex-col md:flex-row items-center gap-8"
+          >
+            <div className="flex-grow">
+              <span className="text-yellow-400 font-black uppercase tracking-[0.3em] text-[10px]">Cinematic Stories</span>
+              <h3 className="text-3xl md:text-4xl font-black text-white uppercase mt-2 mb-4">Wedding Collections</h3>
+              <p className="text-zinc-400 text-sm md:text-base max-w-md font-medium mb-6">
+                From intimate ceremonies to royal celebrations. Starting from <span className="text-white font-bold">₹11,999</span>.
+              </p>
+            </div>
+            <button
+              onClick={() => window.location.href = "/booking?type=wedding"}
+              className="w-full md:w-auto px-12 py-5 rounded-2xl bg-yellow-400 text-black font-black uppercase text-[10px] tracking-widest hover:bg-white transition-all"
+            >
+              Know More
+            </button>
+          </motion.div>
+
+          {/* Business Wide Tile */}
+          <motion.div
+            whileHover={{ scale: 1.01 }}
+            className="relative overflow-hidden rounded-[2.5rem] border-2 border-zinc-800 bg-zinc-900 p-8 md:p-12 flex flex-col md:flex-row items-center gap-8"
+          >
+            <div className="flex-grow">
+              <span className="text-yellow-400 font-black uppercase tracking-[0.3em] text-[10px]">Brand Strategy</span>
+              <h3 className="text-3xl md:text-4xl font-black text-white uppercase mt-2 mb-4">Business & Brands</h3>
+              <p className="text-zinc-400 text-sm md:text-base max-w-md font-medium mb-6">
+                High-conversion commercial content designed to scale your brand presence.
+              </p>
+            </div>
+            <button
+              onClick={() => window.location.href = "/booking?type=business"}
+              className="w-full md:w-auto px-12 py-5 rounded-2xl bg-yellow-400 text-black font-black uppercase text-[10px] tracking-widest hover:bg-white transition-all"
+            >
+              Book Now
+            </button>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Our Works */}
       <section
-        id="services"
+        id="works"
         className="py-24 px-6 bg-zinc-950 border-t border-zinc-800"
       >
         <div className="max-w-7xl mx-auto">
@@ -694,25 +774,20 @@ const App = () => {
               Cinematic Excellence across every category.
             </p>
           </div>
-
-          {/* Scrollable Categories for Mobile */}
           <div className="flex overflow-x-auto md:justify-center gap-6 mb-16 pb-4 scrollbar-hide no-scrollbar">
             {categories.map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`text-[11px] font-black uppercase tracking-[0.2em] pb-2 transition-all border-b-2 whitespace-nowrap ${
-                  activeTab === tab
+                className={`text-[11px] font-black uppercase tracking-[0.2em] pb-2 transition-all border-b-2 whitespace-nowrap ${activeTab === tab
                     ? "border-yellow-400 text-yellow-400"
                     : "border-transparent text-zinc-600 hover:text-zinc-400"
-                }`}
+                  }`}
               >
                 {tab}
               </button>
             ))}
           </div>
-
-          {/* Responsive Grid */}
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8">
             <AnimatePresence mode="wait">
               {displayReels.map((reel) => (
@@ -757,110 +832,6 @@ const App = () => {
               ))}
             </AnimatePresence>
           </div>
-        </div>
-      </section>
-
-      {/* Pricing Section */}
-      <section
-        id="pricing"
-        className="py-24 px-4 md:px-6 max-w-7xl mx-auto bg-zinc-950 border-t border-zinc-800"
-      >
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-6xl font-black mb-12 uppercase text-white tracking-tighter">
-            Plans & Pricing
-          </h2>
-
-          <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-16">
-            {["regular", "wedding", "business"].map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setPricingTab(tab)}
-                className={`px-6 md:px-10 py-3 md:py-4 rounded-xl md:rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all ${
-                  pricingTab === tab
-                    ? "bg-yellow-400 text-black shadow-xl scale-105"
-                    : "bg-zinc-900 text-zinc-500 hover:bg-zinc-800"
-                }`}
-              >
-                {tab}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Swipe Container */}
-        <motion.div
-          key={pricingTab}
-          initial={{ opacity: 0, scale: 0.98 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.2 }}
-          className="flex md:flex-wrap md:justify-center gap-4 md:gap-8 overflow-x-auto md:overflow-visible pb-8 snap-x snap-mandatory scrollbar-hide"
-        >
-          {pricingData[pricingTab].map((plan, i) => (
-            <motion.div
-              key={i}
-              whileHover={{
-                y: -10,
-                borderColor: "rgba(250, 204, 21, 0.5)",
-                boxShadow: "0 0 40px rgba(250, 204, 21, 0.1)",
-              }}
-              // Fixed width (md:w-[380px]) ensures all 6 wedding tiles look identical
-              className={`p-8 md:p-12 min-w-[85vw] md:min-w-[380px] md:max-w-[400px] min-h-[650px] rounded-[2.5rem] md:rounded-[3rem] border-2 transition-all flex flex-col relative snap-center ${
-                plan.dark
-                  ? "bg-yellow-400 text-black border-transparent shadow-2xl shadow-yellow-400/20"
-                  : "bg-zinc-900 text-white border-zinc-800 hover:border-zinc-700"
-              }`}
-            >
-              <h3
-                className={`text-lg md:text-xl font-bold mb-2 uppercase tracking-widest ${!plan.dark ? "text-zinc-500" : "text-black/60"}`}
-              >
-                {plan.title}
-              </h3>
-
-              <div
-                className={`text-4xl md:text-5xl font-black mb-8 ${!plan.dark ? "text-yellow-400" : "text-black"}`}
-              >
-                {plan.price}
-                <span
-                  className={`text-xs md:text-sm font-bold ml-1 ${!plan.dark ? "text-zinc-500" : "text-black/40"}`}
-                >
-                  {plan.suffix}
-                </span>
-              </div>
-
-              <div className="flex-grow">
-                <ul className="space-y-4">
-                  {plan.features.map((feat, idx) => (
-                    <li
-                      key={idx}
-                      className={`flex items-start gap-3 text-xs md:text-sm font-black leading-tight ${!plan.dark ? "text-zinc-300" : "text-black"}`}
-                    >
-                      <Check
-                        size={18}
-                        className={`mt-0.5 flex-shrink-0 ${!plan.dark ? "text-yellow-400" : "text-black"}`}
-                      />
-                      {feat}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <button
-                onClick={() => window.open("/booking.html", "_blank")}
-                className={`w-full py-5 mt-8 rounded-2xl font-black uppercase text-[10px] tracking-widest transition-all ${
-                  plan.dark
-                    ? "bg-black text-white hover:bg-zinc-800"
-                    : "bg-yellow-400 text-black hover:bg-white"
-                }`}
-              >
-                Book {plan.title}
-              </button>
-            </motion.div>
-          ))}
-        </motion.div>
-        <div className="flex justify-center gap-1.5 mt-4 md:hidden">
-          {[0, 1, 2].map((dot) => (
-            <div key={dot} className="w-1.5 h-1.5 rounded-full bg-zinc-800" />
-          ))}
         </div>
       </section>
 
