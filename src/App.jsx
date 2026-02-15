@@ -751,7 +751,7 @@ const App = () => {
               </p>
             </div>
             <button
-              onClick={() => window.location.href = "/booking?type=business"}
+              onClick={() => window.location.href = "/booking"}
               className="w-full md:w-auto px-12 py-5 rounded-2xl bg-yellow-400 text-black font-black uppercase text-[10px] tracking-widest hover:bg-white transition-all"
             >
               Book Now
