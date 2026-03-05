@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom/client';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Check, ArrowRight, User, Mail, Calendar, Clock, 
-  MessageSquare, ArrowLeft, ShieldCheck, Sparkles, Trophy 
+  MessageSquare, ArrowLeft, ShieldCheck, Sparkles, Trophy,
+  ChevronRight, Globe, Zap
 } from 'lucide-react';
 
 const BookingPage = () => {
@@ -11,7 +12,6 @@ const BookingPage = () => {
   const [selectedPlan, setSelectedPlan] = useState('Half Day');
   const [submitted, setSubmitted] = useState(false);
 
-  // Ensure page starts at top
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -35,52 +35,70 @@ const BookingPage = () => {
   };
 
   const benefits = [
-    { icon: <ShieldCheck size={18} />, text: "iPhone 16 Pro Quality" },
-    { icon: <Trophy size={18} />, text: "Cinema Stabilization" },
-    { icon: <Sparkles size={18} />, text: "Trending Hooks" }
+    { icon: <ShieldCheck size={16} />, text: "iPhone 16 Pro Quality" },
+    { icon: <Zap size={16} />, text: "24h Turnaround" },
+    { icon: <Sparkles size={16} />, text: "Trending Hooks" }
   ];
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-white font-sans selection:bg-yellow-400 selection:text-black">
+    <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans selection:bg-yellow-400 selection:text-black antialiased">
       {/* Navbar */}
-      <nav className="p-6 border-b border-zinc-900 flex justify-between items-center bg-zinc-950/80 backdrop-blur-xl sticky top-0 z-50">
-        <div className="flex items-center gap-6">
-          <a href="/" className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-zinc-500 hover:text-yellow-400 transition-colors group">
-            <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
-            Go Back
-          </a>
-          
-          <div className="h-4 w-[1px] bg-zinc-800 hidden md:block" />
-          
-          {/* Logo Section - No Text, Just Image */}
-          <div 
-            className="cursor-pointer flex items-center justify-center overflow-hidden h-10 w-32"
-            onClick={() => window.location.href='/'}
-          >
-             <img
+      <nav className="fixed top-0 w-full z-50 border-b border-white/5 bg-zinc-950/70 backdrop-blur-xl">
+        <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+          <div className="flex items-center gap-8">
+            <a href="/" className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-zinc-500 hover:text-white transition-all group">
+              <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
+              Back
+            </a>
+            
+            <div className="hidden md:block h-6 w-[1px] bg-zinc-800" />
+            
+            <div 
+              className="cursor-pointer flex items-center h-8 w-28 opacity-90 hover:opacity-100 transition-opacity"
+              onClick={() => window.location.href='/'}
+            >
+               <img
                 src="/logo.png" 
                 alt="CVGPOST Logo"
-                className="h-[280%] w-auto max-w-none object-contain brightness-110" 
+                className="h-[250%] w-auto object-contain brightness-110" 
               />
+            </div>
           </div>
-        </div>
-        <div className="text-[10px] font-black uppercase tracking-widest text-zinc-600 hidden sm:block">
-            Production Booking • 2026
+          <div className="hidden sm:flex items-center gap-4">
+            <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900 border border-zinc-800 text-[10px] font-bold text-zinc-400">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              Booking Open
+            </div>
+          </div>
         </div>
       </nav>
 
-      <main className="max-w-7xl mx-auto py-16 px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+      <main className="max-w-7xl mx-auto pt-32 pb-20 px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
           
-          {/* Left Column */}
-          <div className="lg:col-span-5 space-y-10">
-            <div>
-              <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none mb-6">
-                Secure Your <span className="text-yellow-400">Slot</span>
-              </h1>
-              
-              {/* Category Toggles */}
-              <div className="flex gap-2 p-1 bg-zinc-900/50 border border-zinc-800 rounded-2xl w-fit mb-8">
+          {/* Selection Column */}
+          <div className="lg:col-span-5 space-y-12">
+            <header className="space-y-4">
+              <motion.span 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="text-yellow-400 text-[10px] font-black uppercase tracking-[0.4em]"
+              >
+                Reservation Terminal
+              </motion.span>
+              <motion.h1 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                className="text-5xl md:text-6xl font-black uppercase tracking-tight leading-[0.9] text-white"
+              >
+                Secure <br /> Your <span className="text-zinc-500">Slot</span>
+              </motion.h1>
+            </header>
+
+            {/* Category Switcher */}
+            <div className="space-y-6">
+              <div className="flex flex-wrap gap-2">
                 {Object.keys(pricingData).map((cat) => (
                   <button
                     key={cat}
@@ -88,133 +106,156 @@ const BookingPage = () => {
                       setActiveCategory(cat);
                       setSelectedPlan(pricingData[cat][0].title);
                     }}
-                    className={`px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${
-                      activeCategory === cat ? 'bg-yellow-400 text-black shadow-lg shadow-yellow-400/20' : 'text-zinc-500 hover:text-white'
+                    className={`px-5 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest transition-all border ${
+                      activeCategory === cat 
+                      ? 'bg-white text-black border-white shadow-xl' 
+                      : 'bg-transparent text-zinc-500 border-zinc-800 hover:border-zinc-600'
                     }`}
                   >
                     {cat}
                   </button>
                 ))}
               </div>
-            </div>
 
-            <div className="space-y-4">
-              <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500">Select {activeCategory} Plan</h3>
-              <AnimatePresence mode="wait">
-                <motion.div 
-                  key={activeCategory}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 20 }}
-                  className="space-y-4"
-                >
-                  {pricingData[activeCategory].map((plan) => (
-                    <motion.div
-                      key={plan.title}
-                      whileHover={{ scale: 1.02, x: 5 }}
-                      onClick={() => setSelectedPlan(plan.title)}
-                      className={`p-6 rounded-[2.5rem] border-2 cursor-pointer transition-all relative overflow-hidden ${
-                        selectedPlan === plan.title 
-                        ? 'border-yellow-400 bg-yellow-400/5 shadow-xl shadow-yellow-400/5' 
-                        : 'border-zinc-900 bg-zinc-900/30 hover:border-zinc-700'
-                      }`}
-                    >
-                      <div className="flex justify-between items-center relative z-10">
-                        <div>
-                          <h4 className="font-black uppercase text-xl text-white">{plan.title}</h4>
-                          <p className="text-yellow-400 font-black tracking-tight text-lg">₹{plan.price}</p>
+              {/* Plan Cards */}
+              <div className="grid gap-3">
+                <AnimatePresence mode="wait">
+                  <motion.div 
+                    key={activeCategory}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="space-y-3"
+                  >
+                    {pricingData[activeCategory].map((plan) => (
+                      <div
+                        key={plan.title}
+                        onClick={() => setSelectedPlan(plan.title)}
+                        className={`group p-5 rounded-2xl border transition-all cursor-pointer relative overflow-hidden ${
+                          selectedPlan === plan.title 
+                          ? 'bg-white/5 border-yellow-400/50' 
+                          : 'bg-zinc-900/40 border-zinc-800 hover:border-zinc-700'
+                        }`}
+                      >
+                        <div className="flex justify-between items-start relative z-10">
+                          <div className="space-y-1">
+                            <h4 className={`text-sm font-black uppercase tracking-wider ${selectedPlan === plan.title ? 'text-white' : 'text-zinc-400'}`}>
+                              {plan.title}
+                            </h4>
+                            <p className="text-zinc-500 text-[11px] leading-relaxed max-w-[220px]">
+                              {plan.details}
+                            </p>
+                          </div>
+                          <div className="text-right">
+                            <span className={`text-lg font-black ${selectedPlan === plan.title ? 'text-yellow-400' : 'text-zinc-300'}`}>
+                              ₹{plan.price}
+                            </span>
+                          </div>
                         </div>
                         {selectedPlan === plan.title && (
-                          <div className="bg-yellow-400 p-2 rounded-full text-black"><Check size={18} strokeWidth={3} /></div>
+                          <motion.div layoutId="activePlan" className="absolute left-0 top-0 bottom-0 w-1 bg-yellow-400" />
                         )}
                       </div>
-                      <p className={`mt-3 text-xs font-medium transition-colors ${selectedPlan === plan.title ? 'text-zinc-300' : 'text-zinc-500'}`}>
-                        {plan.details}
-                      </p>
-                    </motion.div>
-                  ))}
-                </motion.div>
-              </AnimatePresence>
+                    ))}
+                  </motion.div>
+                </AnimatePresence>
+              </div>
             </div>
 
-            <div className="pt-6 border-t border-zinc-900">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {benefits.map((b, i) => (
-                  <div key={i} className="flex items-center gap-3 text-[10px] font-black uppercase tracking-widest text-zinc-400">
-                    <span className="text-yellow-400">{b.icon}</span> {b.text}
-                  </div>
-                ))}
-              </div>
+            {/* Benefits Footer */}
+            <div className="flex flex-wrap gap-6 pt-8 border-t border-zinc-900">
+              {benefits.map((b, i) => (
+                <div key={i} className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-zinc-500">
+                  <span className="text-yellow-400">{b.icon}</span>
+                  {b.text}
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* Right Column: Form */}
+          {/* Form Column */}
           <div className="lg:col-span-7">
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-zinc-900/50 p-8 md:p-12 rounded-[3.5rem] border border-zinc-800 shadow-2xl relative overflow-hidden">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="bg-zinc-900/30 border border-zinc-800 p-8 md:p-12 rounded-[2.5rem] relative overflow-hidden backdrop-blur-sm"
+            >
               {!submitted ? (
-                <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} className="space-y-6 relative z-10">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label className="text-[10px] font-black uppercase tracking-widest ml-4 text-zinc-500">Your Name</label>
-                      <div className="relative">
-                        <User className="absolute left-5 top-1/2 -translate-y-1/2 text-zinc-600" size={18} />
-                        <input required placeholder="Enter Full Name" className="w-full bg-zinc-950 rounded-2xl py-5 pl-14 pr-6 outline-none border-2 border-transparent focus:border-yellow-400 text-white placeholder-zinc-700 transition-all font-bold" />
+                <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} className="space-y-8 relative z-10">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="space-y-3">
+                      <label className="text-[10px] font-black uppercase tracking-widest text-zinc-500 ml-1">Client Name</label>
+                      <div className="group relative">
+                        <User className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-700 group-focus-within:text-yellow-400 transition-colors" size={16} />
+                        <input required placeholder="Full Name" className="w-full bg-zinc-950 border border-zinc-800 rounded-xl py-4 pl-12 pr-4 outline-none focus:border-yellow-400/50 text-sm font-medium transition-all" />
                       </div>
                     </div>
-                    <div className="space-y-2">
-                      <label className="text-[10px] font-black uppercase tracking-widest ml-4 text-zinc-500">Email Contact</label>
-                      <div className="relative">
-                        <Mail className="absolute left-5 top-1/2 -translate-y-1/2 text-zinc-600" size={18} />
-                        <input required type="email" placeholder="email@company.com" className="w-full bg-zinc-950 rounded-2xl py-5 pl-14 pr-6 outline-none border-2 border-transparent focus:border-yellow-400 text-white placeholder-zinc-700 transition-all font-bold" />
+                    <div className="space-y-3">
+                      <label className="text-[10px] font-black uppercase tracking-widest text-zinc-500 ml-1">Email Address</label>
+                      <div className="group relative">
+                        <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-700 group-focus-within:text-yellow-400 transition-colors" size={16} />
+                        <input required type="email" placeholder="email@company.com" className="w-full bg-zinc-950 border border-zinc-800 rounded-xl py-4 pl-12 pr-4 outline-none focus:border-yellow-400/50 text-sm font-medium transition-all" />
                       </div>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label className="text-[10px] font-black uppercase tracking-widest ml-4 text-zinc-500">Preferred Date</label>
-                      <div className="relative">
-                        <Calendar className="absolute left-5 top-1/2 -translate-y-1/2 text-zinc-600" size={18} />
-                        <input required type="date" className="w-full bg-zinc-950 rounded-2xl py-5 pl-14 pr-6 outline-none border-2 border-transparent focus:border-yellow-400 text-white placeholder-zinc-700 transition-all font-bold [color-scheme:dark]" />
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="space-y-3">
+                      <label className="text-[10px] font-black uppercase tracking-widest text-zinc-500 ml-1">Shoot Date</label>
+                      <div className="group relative">
+                        <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-700 group-focus-within:text-yellow-400 transition-colors" size={16} />
+                        <input required type="date" className="w-full bg-zinc-950 border border-zinc-800 rounded-xl py-4 pl-12 pr-4 outline-none focus:border-yellow-400/50 text-sm font-medium transition-all [color-scheme:dark]" />
                       </div>
                     </div>
-                    <div className="space-y-2">
-                      <label className="text-[10px] font-black uppercase tracking-widest ml-4 text-zinc-500">Time Slot</label>
-                      <div className="relative">
-                        <Clock className="absolute left-5 top-1/2 -translate-y-1/2 text-zinc-600" size={18} />
-                        <select className="w-full bg-zinc-950 rounded-2xl py-5 pl-14 pr-6 outline-none border-2 border-transparent focus:border-yellow-400 text-white transition-all font-bold appearance-none">
+                    <div className="space-y-3">
+                      <label className="text-[10px] font-black uppercase tracking-widest text-zinc-500 ml-1">Preferred Time</label>
+                      <div className="group relative">
+                        <Clock className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-700 group-focus-within:text-yellow-400 transition-colors" size={16} />
+                        <select className="w-full bg-zinc-950 border border-zinc-800 rounded-xl py-4 pl-12 pr-10 outline-none focus:border-yellow-400/50 text-sm font-medium transition-all appearance-none cursor-pointer">
                           <option>Morning (10AM - 2PM)</option>
                           <option>Evening (3PM - 7PM)</option>
                           <option>Full Day Session</option>
                         </select>
+                        <ChevronRight className="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-700 rotate-90 pointer-events-none" size={16} />
                       </div>
                     </div>
                   </div>
 
-                  <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase tracking-widest ml-4 text-zinc-500">Vision for this {activeCategory} Shoot</label>
-                    <div className="relative">
-                      <MessageSquare className="absolute left-5 top-6 text-zinc-600" size={18} />
-                      <textarea placeholder={`What are we filming for your ${selectedPlan} session?`} className="w-full bg-zinc-950 rounded-2xl py-5 pl-14 pr-6 outline-none border-2 border-transparent focus:border-yellow-400 text-white placeholder-zinc-700 transition-all font-bold h-32 resize-none"></textarea>
+                  <div className="space-y-3">
+                    <label className="text-[10px] font-black uppercase tracking-widest text-zinc-500 ml-1">Project Brief</label>
+                    <div className="group relative">
+                      <MessageSquare className="absolute left-4 top-5 text-zinc-700 group-focus-within:text-yellow-400 transition-colors" size={16} />
+                      <textarea placeholder={`Tell us about your ${selectedPlan} project vision...`} className="w-full bg-zinc-950 border border-zinc-800 rounded-xl py-4 pl-12 pr-4 outline-none focus:border-yellow-400/50 text-sm font-medium transition-all h-32 resize-none"></textarea>
                     </div>
                   </div>
 
-                  <button className="w-full bg-yellow-400 text-black py-6 rounded-2xl font-black uppercase tracking-[0.2em] text-sm hover:bg-white hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xl shadow-white/5 flex items-center justify-center gap-3 group">
-                    Confirm {selectedPlan} Booking
-                    <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                  <button className="w-full bg-yellow-400 text-black py-5 rounded-xl font-black uppercase tracking-widest text-[11px] hover:bg-white transition-all shadow-lg shadow-yellow-400/5 flex items-center justify-center gap-3 group">
+                    Confirm {selectedPlan} Request
+                    <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                   </button>
+                  
+                  <p className="text-center text-[9px] font-bold text-zinc-600 uppercase tracking-widest">
+                    By clicking, you agree to our production terms & conditions.
+                  </p>
                 </form>
               ) : (
-                <div className="text-center py-20 relative z-10">
-                  <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="bg-yellow-400 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-8 shadow-2xl shadow-yellow-400/50">
-                    <Check size={48} strokeWidth={3} className="text-black" />
+                <div className="text-center py-20 relative z-10 space-y-6">
+                  <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="bg-emerald-500 w-20 h-20 rounded-full flex items-center justify-center mx-auto shadow-2xl shadow-emerald-500/20">
+                    <Check size={40} strokeWidth={3} className="text-white" />
                   </motion.div>
-                  <h2 className="text-4xl font-black uppercase tracking-tight mb-4 text-white">Request Sent!</h2>
-                  <p className="text-zinc-500 font-bold uppercase tracking-widest text-[10px]">We'll be in touch within 2 hours.</p>
+                  <div className="space-y-2">
+                    <h2 className="text-3xl font-black uppercase tracking-tight text-white">Application Sent</h2>
+                    <p className="text-zinc-500 font-bold uppercase tracking-[0.2em] text-[10px]">Our production manager will call you within 2 hours.</p>
+                  </div>
+                  <button onClick={() => setSubmitted(false)} className="text-[10px] font-black uppercase tracking-widest text-yellow-400 hover:text-white transition-colors">
+                    Send another request
+                  </button>
                 </div>
               )}
-              {/* Decorative Glow */}
-              <div className="absolute top-0 right-0 w-64 h-64 bg-yellow-400/5 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none" />
+              
+              {/* Subtle Decorative Elements */}
+              <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-yellow-400/10 rounded-full blur-[100px] pointer-events-none" />
+              <div className="absolute -top-24 -left-24 w-48 h-48 bg-blue-500/5 rounded-full blur-[80px] pointer-events-none" />
             </motion.div>
           </div>
         </div>

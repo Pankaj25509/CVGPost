@@ -459,6 +459,9 @@ const App = () => {
     }, 3000);
   };
 
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState("");
+
   return (
     <div className="min-h-screen bg-zinc-950 text-white font-sans selection:bg-yellow-400 selection:text-white overflow-x-hidden">
       {/* Navbar */}
@@ -682,12 +685,17 @@ const App = () => {
       {/* Our Services */}
 
       {/* Pricing Section */}
-      <section id="pricing" className="py-24 px-4 md:px-6 max-w-7xl mx-auto bg-zinc-950 border-t border-zinc-800">
+      <section
+        id="pricing"
+        className="py-24 px-4 md:px-6 max-w-7xl mx-auto bg-zinc-950 border-t border-zinc-800"
+      >
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-6xl font-black mb-4 uppercase text-white tracking-tighter">
             Choose Your Perfect Plan
           </h2>
-          <p className="text-zinc-500 font-bold uppercase tracking-widest text-[10px]">Simple pricing for extraordinary results.</p>
+          <p className="text-zinc-500 font-bold uppercase tracking-widest text-[10px]">
+            Simple pricing for extraordinary results.
+          </p>
         </div>
 
         {/* Regular Pricing Tiles (2 Tiles) */}
@@ -698,18 +706,35 @@ const App = () => {
               whileHover={{ y: -10, borderColor: "rgba(250, 204, 21, 0.5)" }}
               className="p-8 md:p-12 rounded-[2.5rem] border-2 border-zinc-800 bg-zinc-900 text-white transition-all flex flex-col"
             >
-              <h3 className="text-lg font-bold mb-2 uppercase tracking-widest text-zinc-500">{plan.title}</h3>
+              <h3 className="text-lg font-bold mb-2 uppercase tracking-widest text-zinc-500">
+                {plan.title}
+              </h3>
               <div className="text-4xl md:text-5xl font-black mb-8 text-yellow-400">
-                {plan.price}<span className="text-sm ml-1 text-zinc-500">{plan.suffix}</span>
+                {plan.price}
+                <span className="text-sm ml-1 text-zinc-500">
+                  {plan.suffix}
+                </span>
               </div>
               <ul className="space-y-4 flex-grow">
                 {plan.features.map((feat, idx) => (
-                  <li key={idx} className="flex items-start gap-3 text-xs md:text-sm font-black text-zinc-300">
-                    <Check size={18} className="text-yellow-400 flex-shrink-0" /> {feat}
+                  <li
+                    key={idx}
+                    className="flex items-start gap-3 text-xs md:text-sm font-black text-zinc-300"
+                  >
+                    <Check
+                      size={18}
+                      className="text-yellow-400 flex-shrink-0"
+                    />{" "}
+                    {feat}
                   </li>
                 ))}
               </ul>
-              <button onClick={() => window.location.href = "/booking"} className="w-full py-5 mt-8 rounded-2xl font-black uppercase text-[10px] bg-yellow-400 text-black hover:bg-white transition-all">
+              <button
+                onClick={() => {
+                  window.open("booking.html", "_blank");
+                }}
+                className="w-full py-5 mt-8 rounded-2xl font-black uppercase text-[10px] bg-yellow-400 text-black hover:bg-white transition-all"
+              >
                 Book {plan.title}
               </button>
             </motion.div>
@@ -724,14 +749,21 @@ const App = () => {
             className="relative overflow-hidden rounded-[2.5rem] border-2 border-zinc-800 bg-zinc-900 p-8 md:p-12 flex flex-col md:flex-row items-center gap-8"
           >
             <div className="flex-grow">
-              <span className="text-yellow-400 font-black uppercase tracking-[0.3em] text-[10px]">Cinematic Stories</span>
-              <h3 className="text-3xl md:text-4xl font-black text-white uppercase mt-2 mb-4">Wedding Collections</h3>
+              <span className="text-yellow-400 font-black uppercase tracking-[0.3em] text-[10px]">
+                Cinematic Stories
+              </span>
+              <h3 className="text-3xl md:text-4xl font-black text-white uppercase mt-2 mb-4">
+                Wedding Collections
+              </h3>
               <p className="text-zinc-400 text-sm md:text-base max-w-md font-medium mb-6">
-                From intimate ceremonies to royal celebrations. Starting from <span className="text-white font-bold">₹11,999</span>.
+                From intimate ceremonies to royal celebrations. Starting from{" "}
+                <span className="text-white font-bold">₹11,999</span>.
               </p>
             </div>
             <button
-              onClick={() => window.location.href = "/booking?type=wedding"}
+              onClick={() => {
+                window.open("booking.html", "_blank");
+              }}
               className="w-full md:w-auto px-12 py-5 rounded-2xl bg-yellow-400 text-black font-black uppercase text-[10px] tracking-widest hover:bg-white transition-all"
             >
               Know More
@@ -744,14 +776,21 @@ const App = () => {
             className="relative overflow-hidden rounded-[2.5rem] border-2 border-zinc-800 bg-zinc-900 p-8 md:p-12 flex flex-col md:flex-row items-center gap-8"
           >
             <div className="flex-grow">
-              <span className="text-yellow-400 font-black uppercase tracking-[0.3em] text-[10px]">Brand Strategy</span>
-              <h3 className="text-3xl md:text-4xl font-black text-white uppercase mt-2 mb-4">Business & Brands</h3>
+              <span className="text-yellow-400 font-black uppercase tracking-[0.3em] text-[10px]">
+                Brand Strategy
+              </span>
+              <h3 className="text-3xl md:text-4xl font-black text-white uppercase mt-2 mb-4">
+                Business & Brands
+              </h3>
               <p className="text-zinc-400 text-sm md:text-base max-w-md font-medium mb-6">
-                High-conversion commercial content designed to scale your brand presence.
+                High-conversion commercial content designed to scale your brand
+                presence.
               </p>
             </div>
             <button
-              onClick={() => window.location.href = "/booking"}
+              onClick={() => {
+                window.open("booking.html", "_blank");
+              }}
               className="w-full md:w-auto px-12 py-5 rounded-2xl bg-yellow-400 text-black font-black uppercase text-[10px] tracking-widest hover:bg-white transition-all"
             >
               Book Now
@@ -779,10 +818,11 @@ const App = () => {
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`text-[11px] font-black uppercase tracking-[0.2em] pb-2 transition-all border-b-2 whitespace-nowrap ${activeTab === tab
+                className={`text-[11px] font-black uppercase tracking-[0.2em] pb-2 transition-all border-b-2 whitespace-nowrap ${
+                  activeTab === tab
                     ? "border-yellow-400 text-yellow-400"
                     : "border-transparent text-zinc-600 hover:text-zinc-400"
-                  }`}
+                }`}
               >
                 {tab}
               </button>
@@ -864,7 +904,7 @@ const App = () => {
                 Creator <br /> Network
               </h3>
 
-              <p className="text-zinc-400 font-medium mb-12 max-w-sm relative z-10 leading-relaxed text-sm text-white text-white">
+              <p className="text-zinc-400 font-medium mb-12 max-w-sm relative z-10 leading-relaxed text-sm text-white">
                 Are you a filmmaker or reel maker? Join India's fastest growing
                 vertical network. We provide elite projects, high-end gear
                 access, and trending strategies.
@@ -908,7 +948,7 @@ const App = () => {
               <h3 className="text-3xl md:text-5xl font-black uppercase mb-6 relative z-10 tracking-tighter text-white">
                 Agency <br /> Solutions
               </h3>
-              <p className="text-zinc-400 font-medium mb-12 max-w-sm relative z-10 leading-relaxed text-sm text-white text-white">
+              <p className="text-zinc-400 font-medium mb-12 max-w-sm relative z-10 leading-relaxed text-sm text-white">
                 White-labeled production for marketing agencies and brands
                 looking to scale. We handle the content so you can handle the
                 business. Bulk rates available.
@@ -994,7 +1034,7 @@ const App = () => {
                     className="w-12 h-12 rounded-full object-cover border-2 border-yellow-400"
                   />
                   <div>
-                    <h4 className="font-black text-sm text-white text-white uppercase tracking-tight">
+                    <h4 className="font-black text-sm text-white uppercase tracking-tight">
                       {review.name}
                     </h4>
                     <p className="text-gray-400 text-[10px] font-bold uppercase tracking-widest">
@@ -1135,13 +1175,13 @@ const App = () => {
                         <input
                           required
                           placeholder="Full Name"
-                          className="w-full p-5 bg-zinc-900 rounded-2xl border-2 border-zinc-900 focus:border-yellow-400 outline-none font-bold text-sm text-white text-white"
+                          className="w-full p-5 bg-zinc-900 rounded-2xl border-2 border-zinc-900 focus:border-yellow-400 outline-none font-bold text-sm text-white"
                         />
                         <input
                           required
                           type="email"
                           placeholder="Email Address"
-                          className="w-full p-5 bg-zinc-900 rounded-2xl border-2 border-zinc-900 focus:border-yellow-400 outline-none font-bold text-sm text-white text-white"
+                          className="w-full p-5 bg-zinc-900 rounded-2xl border-2 border-zinc-900 focus:border-yellow-400 outline-none font-bold text-sm text-white"
                         />
                       </div>
                       <input
@@ -1151,14 +1191,14 @@ const App = () => {
                             ? "Instagram / Portfolio Link"
                             : "Company / Brand Name"
                         }
-                        className="w-full p-5 bg-zinc-900 rounded-2xl border-2 border-zinc-900 focus:border-yellow-400 outline-none font-bold text-sm text-white text-white"
+                        className="w-full p-5 bg-zinc-900 rounded-2xl border-2 border-zinc-900 focus:border-yellow-400 outline-none font-bold text-sm text-white"
                       />
                       <textarea
                         required
                         placeholder="Tell us about your goals..."
-                        className="w-full p-5 bg-zinc-900 rounded-2xl border-2 border-zinc-900 focus:border-yellow-400 outline-none font-bold text-sm text-white text-white h-32 resize-none"
+                        className="w-full p-5 bg-zinc-900 rounded-2xl border-2 border-zinc-900 focus:border-yellow-400 outline-none font-bold text-sm text-white h-32 resize-none"
                       ></textarea>
-                      <button className="w-full bg-yellow-400 text-white py-6 rounded-2xl font-black uppercase tracking-widest text-[11px] hover:bg-yellow-400 hover:text-white transition-all flex items-center justify-center gap-3">
+                      <button className="w-full bg-yellow-400 text-black py-6 rounded-2xl font-black uppercase tracking-widest text-[11px] hover:bg-yellow-400 hover:text-white transition-all flex items-center justify-center gap-3">
                         Send Application <Send size={16} />
                       </button>
                     </form>
@@ -1213,7 +1253,7 @@ const App = () => {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="relative z-10 bg-yellow-400 text-white p-4 rounded-2xl shadow-2xl group flex items-center justify-center border border-zinc-800/5"
+              className="relative z-10 bg-yellow-400 text-black p-4 rounded-2xl shadow-2xl group flex items-center justify-center border border-zinc-800/5"
             >
               <ArrowUp
                 size={24}
@@ -1224,6 +1264,62 @@ const App = () => {
           )}
         </AnimatePresence>
       </div>
+
+      {/* FIXED: BOOKING MODAL WAS OUTSIDE THE COMPONENT, MOVED INSIDE */}
+      <AnimatePresence>
+        {isBookingOpen && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/90 backdrop-blur-md">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              className="bg-zinc-900 border border-zinc-800 p-10 rounded-[3rem] w-full max-w-lg relative shadow-2xl"
+            >
+              {/* CLOSE BUTTON */}
+              <button
+                onClick={() => setIsBookingOpen(false)}
+                className="absolute top-6 right-8 text-zinc-500 hover:text-yellow-400 text-2xl"
+              >
+                ✕
+              </button>
+
+              <h2 className="text-3xl font-black text-white uppercase mb-2">
+                Book {selectedPlan}
+              </h2>
+              <p className="text-zinc-500 text-xs uppercase tracking-widest mb-8">
+                Secure your date below
+              </p>
+
+              <form className="space-y-4">
+                <input
+                  placeholder="Your Name"
+                  className="w-full p-4 bg-zinc-950 border border-zinc-800 rounded-2xl text-white outline-none focus:border-yellow-400"
+                />
+                <input
+                  placeholder="Email"
+                  type="email"
+                  className="w-full p-4 bg-zinc-950 border border-zinc-800 rounded-2xl text-white outline-none focus:border-yellow-400"
+                />
+                <input
+                  type="date"
+                  className="w-full p-4 bg-zinc-950 border border-zinc-800 rounded-2xl text-white [color-scheme:dark]"
+                />
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    alert("Request Sent!");
+                    setIsBookingOpen(false);
+                  }}
+                  className="w-full py-5 bg-yellow-400 text-black font-black uppercase rounded-2xl hover:bg-white transition-all"
+                >
+                  Confirm Booking
+                </button>
+              </form>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
