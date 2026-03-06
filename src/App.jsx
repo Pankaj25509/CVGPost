@@ -1,19 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence, easeOut } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
-  Zap,
   Check,
   Play,
-  Camera,
   User,
   ArrowRight,
   ChevronDown,
   Star,
   Quote,
-  Calendar,
   ArrowUp,
   MessageCircle,
-  Briefcase,
   Users,
   Target,
   Award,
@@ -24,7 +20,6 @@ import {
   Layers,
   Send,
   Building,
-  Globe,
   ShieldCheck,
   Trophy,
 } from "lucide-react";
@@ -461,7 +456,6 @@ const App = () => {
 
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState("");
-
   return (
     <div className="min-h-screen bg-zinc-950 text-white font-sans selection:bg-yellow-400 selection:text-white overflow-x-hidden">
       {/* Navbar */}
@@ -1323,5 +1317,4 @@ const App = () => {
     </div>
   );
 };
-
 export default App;
