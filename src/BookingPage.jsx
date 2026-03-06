@@ -265,3 +265,4 @@ const BookingPage = () => {
 };
 
 ReactDOM.createRoot(document.getElementById('booking-root')).render(<BookingPage />);
+export default BookingPage;
