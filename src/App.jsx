@@ -240,7 +240,7 @@ const pricingData = {
   regular: [
     {
       title: "Hourly",
-      price: "₹1,999",
+      price: "1,999",
       suffix: "/hr",
       features: [
         "Shot on iPhone",
@@ -252,7 +252,7 @@ const pricingData = {
     },
     {
       title: "Half Day",
-      price: "₹4,799",
+      price: "4,799",
       features: [
         "3 Hours Coverage",
         "2 Professional Reels",
@@ -269,7 +269,7 @@ const pricingData = {
   wedding: [
     {
       title: "Starter",
-      price: "₹11,999",
+      price: "11,999",
       suffix: "+GST",
       features: [
         "Shot on iPhone",
@@ -281,7 +281,7 @@ const pricingData = {
     },
     {
       title: "Elevate",
-      price: "₹21,999",
+      price: "21,999",
       suffix: "+GST",
       features: [
         "Shot on iPhone",
@@ -293,7 +293,7 @@ const pricingData = {
     },
     {
       title: "Classic",
-      price: "₹34,999",
+      price: "34,999",
       suffix: "+GST",
       features: [
         "Shot on iPhone",
@@ -305,7 +305,7 @@ const pricingData = {
     },
     {
       title: "Signature",
-      price: "₹54,999",
+      price: "54,999",
       suffix: "+GST",
       features: [
         "Shot on iPhone",
@@ -319,7 +319,7 @@ const pricingData = {
     },
     {
       title: "Prestige",
-      price: "₹66,999",
+      price: "66,999",
       suffix: "+GST",
       features: [
         "Shot on iPhone",
@@ -333,7 +333,7 @@ const pricingData = {
     },
     {
       title: "Royal",
-      price: "₹79,999",
+      price: "79,999",
       suffix: "+GST",
       features: [
         "Shot on iPhone",
@@ -349,7 +349,7 @@ const pricingData = {
   business: [
     {
       title: "Smart Price Option",
-      price: "₹10,000",
+      price: "10,000",
       suffix: "",
       features: [
         "Cinematic visuals",
@@ -518,18 +518,20 @@ const App = () => {
             </a>
           </div>
 
-          {/* Right Action Button */}
+          {/* Right Action Button*/}
           <div className="flex justify-end min-w-[140px]">
-            <motion.a
-              href="/booking.html"
-              target="_blank"
-              rel="noopener noreferrer"
+            <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-yellow-400 text-black px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-white transition-all shadow-lg shadow-yellow-400/20"
+              onClick={() => {
+                setSelectedPlan("Half Day");
+                setActiveCategory("Regular");
+                setIsBookingOpen(true);
+              }}
+              className="bg-yellow-400 text-black px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-white transition-all shadow-lg shadow-yellow-400/20 cursor-pointer"
             >
               Book Now
-            </motion.a>
+            </motion.button>
           </div>
         </div>
       </nav>
@@ -820,11 +822,10 @@ const App = () => {
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`text-[11px] font-black uppercase tracking-[0.2em] pb-2 transition-all border-b-2 whitespace-nowrap ${
-                  activeTab === tab
-                    ? "border-yellow-400 text-yellow-400"
-                    : "border-transparent text-zinc-600 hover:text-zinc-400"
-                }`}
+                className={`text-[11px] font-black uppercase tracking-[0.2em] pb-2 transition-all border-b-2 whitespace-nowrap ${activeTab === tab
+                  ? "border-yellow-400 text-yellow-400"
+                  : "border-transparent text-zinc-600 hover:text-zinc-400"
+                  }`}
               >
                 {tab}
               </button>
@@ -1266,167 +1267,195 @@ const App = () => {
           )}
         </AnimatePresence>
       </div>
-
       {/* Full-Screen Booking Modal */}
       <AnimatePresence>
         {isBookingOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 50 }}
-            className="fixed inset-0 z-[999] bg-zinc-950 overflow-y-auto pb-20"
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            className="fixed inset-0 z-[999] flex items-center justify-center p-4 md:p-8"
           >
-            {/* Top Bar with Close Button */}
-            <div className="sticky top-0 z-[1000] flex justify-end p-6 max-w-7xl mx-auto w-full">
-              <button
+            {/* 1. Backdrop: Blurs and Darkens */}
+            <motion.div
+              variants={{
+                initial: { opacity: 0, backdropFilter: "blur(0px)" },
+                animate: { opacity: 1, backdropFilter: "blur(20px)" },
+                exit: { opacity: 0, backdropFilter: "blur(0px)" }
+              }}
+              transition={{ duration: 0.4 }}
+              onClick={() => setIsBookingOpen(false)} // Close when clicking outside
+              className="absolute inset-0 bg-black/80 cursor-pointer"
+            />
+
+            {/* 2. Main Modal Container */}
+            <motion.div
+              variants={{
+                initial: { opacity: 0, y: 100, scale: 0.9, rotateX: 15 },
+                animate: { opacity: 1, y: 0, scale: 1, rotateX: 0 },
+                exit: { opacity: 0, y: 50, scale: 0.95, transition: { duration: 0.2 } }
+              }}
+              transition={{
+                type: "spring",
+                damping: 25,
+                stiffness: 200,
+                mass: 0.8
+              }}
+              className="relative w-full max-w-5xl bg-[#0a0a0a] border border-white/10 rounded-[2.5rem] shadow-[0_0_100px_rgba(0,0,0,1)] overflow-hidden z-10"
+            >
+              {/* Animated Close Button */}
+              <motion.button
+                whileHover={{ rotate: 90, scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
                 onClick={() => setIsBookingOpen(false)}
-                className="bg-zinc-900 border border-zinc-800 text-white px-6 py-3 rounded-full font-black uppercase text-[10px] tracking-widest hover:bg-red-500 transition-all"
+                className="absolute top-8 right-8 z-[1001] w-12 h-12 bg-white/5 border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors"
               >
-                Close [X]
-              </button>
-            </div>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+              </motion.button>
 
-            <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12">
-              {/* Left Side: Package Info */}
-              <div className="lg:col-span-5 space-y-8">
-                <div>
-                  <h2 className="text-4xl md:text-5xl font-black uppercase text-white mb-2">
-                    Book{" "}
-                    <span className="text-yellow-400">{activeCategory}</span>
-                  </h2>
-                  <p className="text-zinc-500 text-xs font-bold uppercase tracking-widest">
-                    Selected: {selectedPlan}
-                  </p>
-                </div>
+              <div className="grid grid-cols-1 lg:grid-cols-2">
 
-                <div className="p-6 rounded-2xl bg-yellow-400/10 border border-yellow-400/20">
-                  <h3 className="text-yellow-400 font-black uppercase text-sm tracking-widest">
-                    Current Selection
-                  </h3>
-                  <p className="text-white text-2xl font-black mt-2">
-                    {selectedPlan} Package
-                  </p>
-                  <p className="text-zinc-400 text-xs mt-2 italic">
-                    Change your selection in the pricing section if needed.
-                  </p>
-                </div>
-              </div>
+                {/* LEFT PANEL: Visual Info */}
+                {/* LEFT PANEL: The Interactive Menu */}
+                <motion.div
+                  initial={{ opacity: 0, x: -40 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.2, duration: 0.5 }}
+                  className="p-8 md:p-12 bg-zinc-900/50 border-r border-white/5 flex flex-col"
+                >
+                  <div className="space-y-10">
+                    {/* Category Switcher */}
+                    <div>
+                      <span className="text-yellow-400 text-[9px] font-black uppercase tracking-[0.4em] mb-4 block">Select Category</span>
+                      <div className="flex bg-black/50 p-1 rounded-2xl border border-white/5">
+                        {Object.keys(pricingData).map((cat) => (
+                          <button
+                            key={cat}
+                            onClick={() => {
+                              setActiveCategory(cat);
+                              setSelectedPlan(pricingData[cat][0].title); // Auto-select first plan of new category
+                            }}
+                            className={`flex-1 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${activeCategory === cat ? 'bg-zinc-800 text-white shadow-xl' : 'text-zinc-600 hover:text-zinc-400'
+                              }`}
+                          >
+                            {cat}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
 
-              {/* Right Side: The Form */}
-              <div className="lg:col-span-7">
-                <div className="bg-zinc-900/50 border border-zinc-800 p-8 rounded-[2rem]">
+                    {/* Dynamic Plan Cards */}
+                    <div className="space-y-4">
+                      <span className="text-zinc-600 text-[9px] font-black uppercase tracking-[0.4em] block">Available Packages</span>
+                      {pricingData && pricingData[activeCategory] && pricingData[activeCategory].map((plan) => (
+                        <motion.div
+                          key={plan.title}
+                          whileHover={{ x: 5 }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={() => setSelectedPlan(plan.title)}
+                          className={`p-5 rounded-2xl cursor-pointer border transition-all relative ${selectedPlan === plan.title
+                            ? 'bg-white border-white shadow-[0_0_30px_rgba(255,255,255,0.1)]'
+                            : 'bg-black/20 border-white/5 hover:border-white/20'
+                            }`}
+                        >
+                          <div className="flex justify-between items-center mb-1">
+                            <h4 className={`text-[11px] font-black uppercase tracking-tighter ${selectedPlan === plan.title ? 'text-black' : 'text-white'}`}>
+                              {plan.title}
+                            </h4>
+                            <span className={`text-sm font-black ${selectedPlan === plan.title ? 'text-black' : 'text-yellow-400'}`}>
+                              ₹{plan.price}
+                            </span>
+                          </div>
+                          <p className={`text-[10px] leading-relaxed font-medium ${selectedPlan === plan.title ? 'text-black/60' : 'text-zinc-500'}`}>
+                            {plan.details}
+                          </p>
+
+                          {/* Selected Indicator Dot */}
+                          {selectedPlan === plan.title && (
+                            <motion.div layoutId="activeDot" className="absolute left-[-4px] top-1/2 -translate-y-1/2 w-2 h-8 bg-yellow-400 rounded-full" />
+                          )}
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Footer Disclaimer */}
+                  <div className="mt-auto pt-10">
+                    <p className="text-[9px] text-zinc-700 font-bold uppercase tracking-widest">
+                      * All prices are base quotes. Final pricing may vary based on location & travel.
+                    </p>
+                  </div>
+                </motion.div>
+                {/* RIGHT PANEL: The Form */}
+                <div className="p-10 md:p-16 bg-[#0a0a0a] flex flex-col justify-center">
                   {!submitted ? (
-                    <form
-                      onSubmit={(e) => {
-                        e.preventDefault();
-                        setSubmitted(true);
-                      }}
-                      className="space-y-6"
+                    <motion.form
+                      initial={{ opacity: 0, x: 40 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.3, duration: 0.5 }}
+                      onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}
+                      className="space-y-5"
                     >
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <input
-                          required
-                          placeholder="Full Name"
-                          className="w-full bg-zinc-950 border border-zinc-800 rounded-xl py-4 px-5 outline-none focus:border-yellow-400 text-white"
-                        />
-                        <input
-                          required
-                          type="email"
-                          placeholder="Email Address"
-                          className="w-full bg-zinc-950 border border-zinc-800 rounded-xl py-4 px-5 outline-none focus:border-yellow-400 text-white"
-                        />
+                      <div className="group relative">
+                        <input required placeholder="FULL NAME" className="w-full bg-transparent border-b border-white/10 py-4 text-white focus:border-yellow-400 outline-none transition-all placeholder:text-zinc-700 text-sm font-bold tracking-widest" />
                       </div>
 
-                      <textarea
-                        placeholder="Tell us about your project..."
-                        className="w-full bg-zinc-950 border border-zinc-800 rounded-xl py-4 px-5 outline-none focus:border-yellow-400 text-white h-32 resize-none"
-                      ></textarea>
+                      <div className="group relative">
+                        <input required type="email" placeholder="EMAIL ADDRESS" className="w-full bg-transparent border-b border-white/10 py-4 text-white focus:border-yellow-400 outline-none transition-all placeholder:text-zinc-700 text-sm font-bold tracking-widest" />
+                      </div>
 
-                      <button
-                        type="submit"
-                        className="w-full bg-yellow-400 text-black py-5 rounded-xl font-black uppercase tracking-widest text-[11px] hover:bg-white transition-all"
-                      >
-                        Send Booking Request
+                      <div className="grid grid-cols-2 gap-8 pt-4">
+                        <div className="space-y-2">
+                          <p className="text-[9px] font-black text-zinc-500 uppercase tracking-widest">Preferred Date</p>
+                          <input required type="date" className="w-full bg-transparent border-b border-white/10 pb-2 text-white outline-none [color-scheme:dark] text-sm font-bold" />
+                        </div>
+                        <div className="space-y-2">
+                          <p className="text-[9px] font-black text-zinc-500 uppercase tracking-widest">Time Block</p>
+                          <select className="w-full bg-transparent border-b border-white/10 pb-2 text-white outline-none text-sm font-bold uppercase">
+                            <option className="bg-zinc-950">Morning</option>
+                            <option className="bg-zinc-950">Evening</option>
+                            <option className="bg-zinc-950">Full Day</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <button type="submit" className="w-full bg-yellow-400 text-black py-6 mt-8 rounded-full font-black uppercase tracking-[0.3em] text-[11px] hover:bg-white hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-xl shadow-yellow-400/20">
+                        Confirm Reservation
                       </button>
-                    </form>
+                    </motion.form>
                   ) : (
-                    <div className="text-center py-16 space-y-6">
-                      <h2 className="text-3xl font-black uppercase text-white">
-                        Request Sent!
-                      </h2>
-                      <p className="text-zinc-500 font-bold text-[10px] uppercase tracking-widest">
-                        We will contact you shortly.
-                      </p>
+                    /* SUCCESS STATE - CUSTOM ANIMATION */
+                    <motion.div
+                      initial={{ scale: 0.5, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      className="text-center"
+                    >
+                      <div className="w-24 h-24 border-2 border-yellow-400 rounded-full flex items-center justify-center mx-auto mb-8 relative">
+                        <motion.div
+                          initial={{ pathLength: 0 }}
+                          animate={{ pathLength: 1 }}
+                          transition={{ duration: 0.8, delay: 0.2 }}
+                        >
+                          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#fac315" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        </motion.div>
+                      </div>
+                      <h3 className="text-3xl font-black text-white uppercase italic tracking-tighter">Request Received</h3>
+                      <p className="text-zinc-500 text-[10px] font-black uppercase tracking-[0.2em] mt-4">Check your inbox for confirmation.</p>
                       <button
-                        onClick={() => setIsBookingOpen(false)}
-                        className="text-yellow-400 font-black uppercase text-[10px] tracking-widest"
+                        onClick={() => { setIsBookingOpen(false); setSubmitted(false); }}
+                        className="mt-12 text-white/40 hover:text-yellow-400 text-[10px] font-black uppercase tracking-widest transition-colors"
                       >
-                        Back to Portfolio
+                        Close Window
                       </button>
-                    </div>
+                    </motion.div>
                   )}
                 </div>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
-      {/* FIXED: BOOKING MODAL WAS OUTSIDE THE COMPONENT, MOVED INSIDE */}
-      <AnimatePresence>
-        {isBookingOpen && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/90 backdrop-blur-md">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              className="bg-zinc-900 border border-zinc-800 p-10 rounded-[3rem] w-full max-w-lg relative shadow-2xl"
-            >
-              {/* CLOSE BUTTON */}
-              <button
-                onClick={() => setIsBookingOpen(false)}
-                className="absolute top-6 right-8 text-zinc-500 hover:text-yellow-400 text-2xl"
-              >
-                ✕
-              </button>
-
-              <h2 className="text-3xl font-black text-white uppercase mb-2">
-                Book {selectedPlan}
-              </h2>
-              <p className="text-zinc-500 text-xs uppercase tracking-widest mb-8">
-                Secure your date below
-              </p>
-
-              <form className="space-y-4">
-                <input
-                  placeholder="Your Name"
-                  className="w-full p-4 bg-zinc-950 border border-zinc-800 rounded-2xl text-white outline-none focus:border-yellow-400"
-                />
-                <input
-                  placeholder="Email"
-                  type="email"
-                  className="w-full p-4 bg-zinc-950 border border-zinc-800 rounded-2xl text-white outline-none focus:border-yellow-400"
-                />
-                <input
-                  type="date"
-                  className="w-full p-4 bg-zinc-950 border border-zinc-800 rounded-2xl text-white [color-scheme:dark]"
-                />
-
-                <button
-                  type="button"
-                  onClick={() => {
-                    alert("Request Sent!");
-                    setIsBookingOpen(false);
-                  }}
-                  className="w-full py-5 bg-yellow-400 text-black font-black uppercase rounded-2xl hover:bg-white transition-all"
-                >
-                  Confirm Booking
-                </button>
-              </form>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
-    </div>
+    </div >
   );
 };
 export default App;
